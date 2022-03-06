@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package VolunteerServicePackage;
+
+service VolunteerServiceRPC {
+  rpc searchVolunteers(SearchVolunteersRequest) returns (SearchVolunteersResponse) {}
+
+  rpc getVolunteersByIds(GetVolunteersByIdsRequest) returns (GetVolunteersByIds) {}
+
+  rpc updateDonateOptions(UpdateDonateOptionsRequest) returns (UpdateDonateOptionsResponse) {}
+}
+
+// getVolunteersByIds
+message VolunteerDto {
+  string id = 1;
+  string name = 2;
+  repeated ActivityType activityTypes = 3;
+  repeated DonateOption donateOption = 4;
+}
+
+message GetVolunteersByIdsRequest {
+  repeated string ids = 1;
+}
+
+message GetVolunteersByIds {
+  repeated VolunteerDto volunteers = 1;
+}
+
+// updateDonateOptions
+message UpdateDonateOptionsRequest {
+
+}
+
+message UpdateDonateOptionsResponse {
+  VolunteerDto volunteer = 1;
+}
+
+// searchVolunteers
+message SearchVolunteersRequest {
+  string city = 1;
+  repeated string activityType = 2;
+  repeated string donateOptions = 3;
+}
+
+message SearchVolunteersResponse {
+  repeated VolunteerDto volunteers = 1;
+}
+
+message ActivityType {
+}
+
+message DonateOption {
+}
