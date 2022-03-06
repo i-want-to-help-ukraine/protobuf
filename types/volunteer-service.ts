@@ -6,12 +6,33 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "VolunteerServicePackage";
 
+export enum DonateOptionType {
+  bankCard = "bankCard",
+  bitcoin = "bitcoin",
+  westernUnion = "westernUnion",
+  UNRECOGNIZED = "UNRECOGNIZED",
+}
+
+export enum VerificationState {
+  requested = "requested",
+  inProgress = "inProgress",
+  verified = "verified",
+  rejected = "rejected",
+  UNRECOGNIZED = "UNRECOGNIZED",
+}
+
+export enum SocialProvider {
+  instagram = "instagram",
+  google = "google",
+  UNRECOGNIZED = "UNRECOGNIZED",
+}
+
 /** getVolunteersByIds */
 export interface VolunteerDto {
   id: string;
   name: string;
-  activityTypes: ActivityType[];
-  donateOption: DonateOption[];
+  activities: VolunteerActivity[];
+  donateOptions: DonateOption[];
 }
 
 export interface GetVolunteersByIdsRequest {
@@ -22,12 +43,58 @@ export interface GetVolunteersByIds {
   volunteers: VolunteerDto[];
 }
 
-/** updateDonateOptions */
-export interface UpdateDonateOptionsRequest {}
-
-export interface UpdateDonateOptionsResponse {
-  volunteer?: VolunteerDto;
+/** Volunteer activities */
+export interface VolunteerActivity {
+  id: string;
+  title: string;
 }
+
+export interface GetVolunteerActivitiesByIdsRequest {}
+
+export interface GetVolunteerActivitiesByIdsResponse {}
+
+/** DonateOption */
+export interface DonateOption {
+  id: string;
+  type: DonateOptionType;
+  values: DonateOptionValue[];
+}
+
+export interface DonateOptionValue {
+  id: string;
+  key: string;
+  value: string;
+}
+
+/** addDonateOption */
+export interface AddDonateOptionRequest {
+  type: DonateOptionType;
+  values: DonateOptionValue[];
+  volunteerId: string;
+}
+
+export interface AddDonateOptionResponse {
+  volunteerDto?: VolunteerDto;
+}
+
+/** updateDonateOptions */
+export interface UpdateDonateOptionRequest {
+  id: string;
+  type: DonateOptionType;
+  values: DonateOptionValue[];
+  volunteerId: string;
+}
+
+export interface UpdateDonateOptionResponse {
+  volunteerDto?: VolunteerDto;
+}
+
+/** updateDonateOptions */
+export interface DeleteDonateOptionRequest {
+  id: string;
+}
+
+export interface DeleteDonateOptionResponse {}
 
 /** searchVolunteers */
 export interface SearchVolunteersRequest {
@@ -40,10 +107,6 @@ export interface SearchVolunteersResponse {
   volunteers: VolunteerDto[];
 }
 
-export interface ActivityType {}
-
-export interface DonateOption {}
-
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 
 export interface VolunteerServiceRPCClient {
@@ -55,9 +118,21 @@ export interface VolunteerServiceRPCClient {
     request: GetVolunteersByIdsRequest
   ): Observable<GetVolunteersByIds>;
 
+  addDonateOption(
+    request: AddDonateOptionRequest
+  ): Observable<AddDonateOptionResponse>;
+
   updateDonateOptions(
-    request: UpdateDonateOptionsRequest
-  ): Observable<UpdateDonateOptionsResponse>;
+    request: UpdateDonateOptionRequest
+  ): Observable<UpdateDonateOptionResponse>;
+
+  deleteDonateOption(
+    request: DeleteDonateOptionRequest
+  ): Observable<DeleteDonateOptionResponse>;
+
+  getVolunteerActivitiesByIds(
+    request: GetVolunteerActivitiesByIdsRequest
+  ): Observable<GetVolunteerActivitiesByIdsResponse>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -75,12 +150,33 @@ export interface VolunteerServiceRPCController {
     | Observable<GetVolunteersByIds>
     | GetVolunteersByIds;
 
-  updateDonateOptions(
-    request: UpdateDonateOptionsRequest
+  addDonateOption(
+    request: AddDonateOptionRequest
   ):
-    | Promise<UpdateDonateOptionsResponse>
-    | Observable<UpdateDonateOptionsResponse>
-    | UpdateDonateOptionsResponse;
+    | Promise<AddDonateOptionResponse>
+    | Observable<AddDonateOptionResponse>
+    | AddDonateOptionResponse;
+
+  updateDonateOptions(
+    request: UpdateDonateOptionRequest
+  ):
+    | Promise<UpdateDonateOptionResponse>
+    | Observable<UpdateDonateOptionResponse>
+    | UpdateDonateOptionResponse;
+
+  deleteDonateOption(
+    request: DeleteDonateOptionRequest
+  ):
+    | Promise<DeleteDonateOptionResponse>
+    | Observable<DeleteDonateOptionResponse>
+    | DeleteDonateOptionResponse;
+
+  getVolunteerActivitiesByIds(
+    request: GetVolunteerActivitiesByIdsRequest
+  ):
+    | Promise<GetVolunteerActivitiesByIdsResponse>
+    | Observable<GetVolunteerActivitiesByIdsResponse>
+    | GetVolunteerActivitiesByIdsResponse;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
@@ -88,7 +184,10 @@ export function VolunteerServiceRPCControllerMethods() {
     const grpcMethods: string[] = [
       "searchVolunteers",
       "getVolunteersByIds",
+      "addDonateOption",
       "updateDonateOptions",
+      "deleteDonateOption",
+      "getVolunteerActivitiesByIds",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(

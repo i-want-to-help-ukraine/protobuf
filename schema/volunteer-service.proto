@@ -7,15 +7,21 @@ service VolunteerServiceRPC {
 
   rpc getVolunteersByIds(GetVolunteersByIdsRequest) returns (GetVolunteersByIds) {}
 
-  rpc updateDonateOptions(UpdateDonateOptionsRequest) returns (UpdateDonateOptionsResponse) {}
+  rpc addDonateOption(AddDonateOptionRequest) returns (AddDonateOptionResponse) {}
+
+  rpc updateDonateOptions(UpdateDonateOptionRequest) returns (UpdateDonateOptionResponse) {}
+
+  rpc deleteDonateOption(DeleteDonateOptionRequest) returns (DeleteDonateOptionResponse) {}
+
+  rpc getVolunteerActivitiesByIds(GetVolunteerActivitiesByIdsRequest) returns (GetVolunteerActivitiesByIdsResponse) {}
 }
 
 // getVolunteersByIds
 message VolunteerDto {
   string id = 1;
   string name = 2;
-  repeated ActivityType activityTypes = 3;
-  repeated DonateOption donateOption = 4;
+  repeated VolunteerActivity activities = 3;
+  repeated DonateOption donateOptions = 4;
 }
 
 message GetVolunteersByIdsRequest {
@@ -26,14 +32,64 @@ message GetVolunteersByIds {
   repeated VolunteerDto volunteers = 1;
 }
 
+// Volunteer activities
+message VolunteerActivity {
+  string id = 1;
+  string title = 2;
+}
+
+message GetVolunteerActivitiesByIdsRequest {}
+
+message GetVolunteerActivitiesByIdsResponse {}
+
+// DonateOption
+message DonateOption {
+  string id = 1;
+  DonateOptionType type = 2;
+  repeated DonateOptionValue values = 3;
+}
+
+enum DonateOptionType {
+  bankCard = 0;
+  bitcoin = 1;
+  westernUnion = 2;
+}
+
+message DonateOptionValue {
+  string id = 1;
+  string key = 2;
+  string value = 3;
+}
+
+// addDonateOption
+message AddDonateOptionRequest {
+  DonateOptionType type = 1;
+  repeated DonateOptionValue values = 2;
+  string volunteerId = 3;
+}
+
+message AddDonateOptionResponse {
+  VolunteerDto volunteerDto = 1;
+}
+
 // updateDonateOptions
-message UpdateDonateOptionsRequest {
-
+message UpdateDonateOptionRequest {
+  string id = 1;
+  DonateOptionType type = 2;
+  repeated DonateOptionValue values = 3;
+  string volunteerId = 4;
 }
 
-message UpdateDonateOptionsResponse {
-  VolunteerDto volunteer = 1;
+message UpdateDonateOptionResponse {
+  VolunteerDto volunteerDto = 1;
 }
+
+// updateDonateOptions
+message DeleteDonateOptionRequest {
+  string id = 1;
+}
+
+message DeleteDonateOptionResponse {}
 
 // searchVolunteers
 message SearchVolunteersRequest {
@@ -46,8 +102,14 @@ message SearchVolunteersResponse {
   repeated VolunteerDto volunteers = 1;
 }
 
-message ActivityType {
+enum VerificationState {
+    requested = 0;
+    inProgress = 1;
+    verified = 2;
+    rejected = 3;
 }
 
-message DonateOption {
+enum SocialProvider {
+  instagram = 0;
+  google = 1;
 }
