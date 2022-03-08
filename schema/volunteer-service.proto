@@ -38,9 +38,13 @@ message VolunteerActivity {
   string title = 2;
 }
 
-message GetVolunteerActivitiesByIdsRequest {}
+message GetVolunteerActivitiesByIdsRequest {
+  repeated string ids = 1;
+}
 
-message GetVolunteerActivitiesByIdsResponse {}
+message GetVolunteerActivitiesByIdsResponse {
+  repeated VolunteerActivity volunteerActivities = 1;
+}
 
 // DonateOption
 message DonateOption {
