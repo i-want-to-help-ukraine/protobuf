@@ -39,8 +39,9 @@ message PaymentOptionsResponse {
 message VolunteerDto {
   string id = 1;
   string name = 2;
-  repeated string activityIds = 3;
-  repeated string paymentOptionIds = 4;
+  City city = 3;
+  repeated string activityIds = 4;
+  repeated string paymentOptionIds = 5;
 }
 
 message VolunteersResponse {
@@ -89,6 +90,11 @@ message UpdatePaymentOptionRequest {
 
 message DeletePaymentOptionRequest {
   string id = 1;
+}
+
+message City {
+  string id = 1;
+  string title = 2;
 }
 
 enum VerificationState {

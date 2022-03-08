@@ -48,6 +48,7 @@ export interface PaymentOptionsResponse {
 export interface VolunteerDto {
   id: string;
   name: string;
+  city?: City;
   activityIds: string[];
   paymentOptionIds: string[];
 }
@@ -92,6 +93,11 @@ export interface UpdatePaymentOptionRequest {
 
 export interface DeletePaymentOptionRequest {
   id: string;
+}
+
+export interface City {
+  id: string;
+  title: string;
 }
 
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
