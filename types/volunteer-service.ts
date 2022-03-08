@@ -6,55 +6,20 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "VolunteerServicePackage";
 
-export enum PaymentOptionType {
-  bankCard = "bankCard",
-  bitcoin = "bitcoin",
-  westernUnion = "westernUnion",
-  UNRECOGNIZED = "UNRECOGNIZED",
-}
-
-export enum VerificationState {
-  requested = "requested",
-  inProgress = "inProgress",
-  verified = "verified",
-  rejected = "rejected",
-  UNRECOGNIZED = "UNRECOGNIZED",
-}
-
-export enum SocialProvider {
-  instagram = "instagram",
-  google = "google",
-  UNRECOGNIZED = "UNRECOGNIZED",
-}
-
+/** Shared */
 export interface GetByIdsRequest {
   ids: string[];
 }
 
-export interface SearchVolunteersRequest {
-  cityIds: string[];
-  activityIds: string[];
-  paymentOptionIds: string[];
-}
-
-export interface ActivitiesResponse {
-  activities: VolunteerActivity[];
-}
-
-export interface PaymentOptionsResponse {
-  paymentOptions: PaymentOption[];
-}
-
-export interface CitiesResponse {
-  cities: City[];
-}
-
+/** Volunteer */
 export interface VolunteerDto {
   id: string;
   name: string;
-  cityIds: string[];
-  activityIds: string[];
-  paymentOptionIds: string[];
+  verificationState: string;
+  cities: CityDto[];
+  activities: ActivityDto[];
+  social: VolunteerSocialDto[];
+  paymentOption: VolunteerPaymentOptionDto[];
 }
 
 export interface VolunteersResponse {
@@ -65,49 +30,120 @@ export interface VolunteerResponse {
   volunteer?: VolunteerDto;
 }
 
-export interface VolunteerActivity {
+export interface VolunteerIdRequest {
+  volunteerId: string;
+}
+
+/** Activity */
+export interface ActivityDto {
+  id: string;
+  title: string;
+  volunteers?: VolunteerDto;
+}
+
+export interface ActivitiesResponse {
+  activities: ActivityDto[];
+}
+
+/** City */
+export interface CityDto {
+  id: string;
+  title: string;
+  volunteers?: VolunteerDto;
+}
+
+export interface CitiesResponse {
+  cities: CityDto[];
+}
+
+/** PaymentProvider */
+export interface PaymentProviderDto {
   id: string;
   title: string;
 }
 
-export interface PaymentOption {
-  id: string;
-  type: PaymentOptionType;
-  values: PaymentOptionValue[];
+export interface PaymentProvidersResponse {
+  paymentProvider: PaymentProviderDto[];
 }
 
-export interface PaymentOptionValue {
+/** SocialProvider */
+export interface SocialProviderDto {
   id: string;
-  key: string;
-  value: string;
+  provider: string;
+  volunteerSocial?: VolunteerSocialDto;
 }
 
-export interface AddPaymentOptionRequest {
-  type: PaymentOptionType;
-  values: PaymentOptionValue[];
+export interface SocialProvidersResponse {
+  socialProviders: SocialProviderDto[];
+}
+
+/** VolunteerSocial */
+export interface VolunteerSocialDto {
+  id: string;
+  url: string;
+  providers?: PaymentProviderDto;
   volunteerId: string;
 }
 
-export interface UpdatePaymentOptionRequest {
+export interface VolunteerSocialResponse {
+  volunteerSocial: VolunteerSocialDto[];
+}
+
+/** VolunteerPaymentOption */
+export interface VolunteerPaymentOptionDto {
   id: string;
-  type: PaymentOptionType;
-  values: PaymentOptionValue[];
+  metadata: string;
+  paymentProviders?: PaymentProviderDto;
   volunteerId: string;
 }
 
-export interface DeletePaymentOptionRequest {
-  id: string;
+export interface VolunteerPaymentOptionResponse {
+  paymentOptions: VolunteerPaymentOptionDto[];
 }
 
-export interface City {
-  id: string;
-  title: string;
+export interface AddPaymentOptionRequest {}
+
+export interface UpdatePaymentOptionRequest {}
+
+export interface DeletePaymentOptionRequest {}
+
+/** search */
+export interface SearchVolunteersRequest {
+  cityIds: string[];
+  activityIds: string[];
+  paymentOptionIds: string[];
 }
 
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 
 export interface VolunteerServiceRPCClient {
   search(request: SearchVolunteersRequest): Observable<VolunteersResponse>;
+
+  getCities(request: GetByIdsRequest): Observable<CitiesResponse>;
+
+  getActivities(request: GetByIdsRequest): Observable<ActivitiesResponse>;
+
+  getSocialProviders(
+    request: GetByIdsRequest
+  ): Observable<SocialProvidersResponse>;
+
+  getPaymentProviders(
+    request: GetByIdsRequest
+  ): Observable<PaymentProvidersResponse>;
+
+  getVolunteerCities(request: VolunteerIdRequest): Observable<CitiesResponse>;
+
+  getVolunteerActivities(
+    request: VolunteerIdRequest
+  ): Observable<ActivitiesResponse>;
+
+  getVolunteerSocial(
+    request: VolunteerIdRequest
+  ): Observable<VolunteerSocialResponse>;
+
+  getVolunteerPaymentOptions(
+    request: VolunteerIdRequest
+  ): Observable<VolunteerPaymentOptionResponse>;
 
   getVolunteersByIds(request: GetByIdsRequest): Observable<VolunteersResponse>;
 
@@ -122,14 +158,6 @@ export interface VolunteerServiceRPCClient {
   deletePaymentOption(
     request: DeletePaymentOptionRequest
   ): Observable<VolunteerResponse>;
-
-  getActivitiesByIds(request: GetByIdsRequest): Observable<ActivitiesResponse>;
-
-  getPaymentOptionsByIds(
-    request: GetByIdsRequest
-  ): Observable<PaymentOptionsResponse>;
-
-  getCitiesByIds(request: GetByIdsRequest): Observable<CitiesResponse>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -139,6 +167,56 @@ export interface VolunteerServiceRPCController {
     | Promise<VolunteersResponse>
     | Observable<VolunteersResponse>
     | VolunteersResponse;
+
+  getCities(
+    request: GetByIdsRequest
+  ): Promise<CitiesResponse> | Observable<CitiesResponse> | CitiesResponse;
+
+  getActivities(
+    request: GetByIdsRequest
+  ):
+    | Promise<ActivitiesResponse>
+    | Observable<ActivitiesResponse>
+    | ActivitiesResponse;
+
+  getSocialProviders(
+    request: GetByIdsRequest
+  ):
+    | Promise<SocialProvidersResponse>
+    | Observable<SocialProvidersResponse>
+    | SocialProvidersResponse;
+
+  getPaymentProviders(
+    request: GetByIdsRequest
+  ):
+    | Promise<PaymentProvidersResponse>
+    | Observable<PaymentProvidersResponse>
+    | PaymentProvidersResponse;
+
+  getVolunteerCities(
+    request: VolunteerIdRequest
+  ): Promise<CitiesResponse> | Observable<CitiesResponse> | CitiesResponse;
+
+  getVolunteerActivities(
+    request: VolunteerIdRequest
+  ):
+    | Promise<ActivitiesResponse>
+    | Observable<ActivitiesResponse>
+    | ActivitiesResponse;
+
+  getVolunteerSocial(
+    request: VolunteerIdRequest
+  ):
+    | Promise<VolunteerSocialResponse>
+    | Observable<VolunteerSocialResponse>
+    | VolunteerSocialResponse;
+
+  getVolunteerPaymentOptions(
+    request: VolunteerIdRequest
+  ):
+    | Promise<VolunteerPaymentOptionResponse>
+    | Observable<VolunteerPaymentOptionResponse>
+    | VolunteerPaymentOptionResponse;
 
   getVolunteersByIds(
     request: GetByIdsRequest
@@ -167,37 +245,24 @@ export interface VolunteerServiceRPCController {
     | Promise<VolunteerResponse>
     | Observable<VolunteerResponse>
     | VolunteerResponse;
-
-  getActivitiesByIds(
-    request: GetByIdsRequest
-  ):
-    | Promise<ActivitiesResponse>
-    | Observable<ActivitiesResponse>
-    | ActivitiesResponse;
-
-  getPaymentOptionsByIds(
-    request: GetByIdsRequest
-  ):
-    | Promise<PaymentOptionsResponse>
-    | Observable<PaymentOptionsResponse>
-    | PaymentOptionsResponse;
-
-  getCitiesByIds(
-    request: GetByIdsRequest
-  ): Promise<CitiesResponse> | Observable<CitiesResponse> | CitiesResponse;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
   return function (constructor: Function) {
     const grpcMethods: string[] = [
       "search",
+      "getCities",
+      "getActivities",
+      "getSocialProviders",
+      "getPaymentProviders",
+      "getVolunteerCities",
+      "getVolunteerActivities",
+      "getVolunteerSocial",
+      "getVolunteerPaymentOptions",
       "getVolunteersByIds",
       "addPaymentOption",
       "updatePaymentOption",
       "deletePaymentOption",
-      "getActivitiesByIds",
-      "getPaymentOptionsByIds",
-      "getCitiesByIds",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(

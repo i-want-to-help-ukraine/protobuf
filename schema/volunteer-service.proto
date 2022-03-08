@@ -5,6 +5,22 @@ package VolunteerServicePackage;
 service VolunteerServiceRPC {
   rpc search(SearchVolunteersRequest) returns (VolunteersResponse) {}
 
+  rpc getCities(GetByIdsRequest) returns (CitiesResponse) {}
+
+  rpc getActivities(GetByIdsRequest) returns (ActivitiesResponse) {}
+
+  rpc getSocialProviders(GetByIdsRequest) returns (SocialProvidersResponse) {}
+
+  rpc getPaymentProviders(GetByIdsRequest) returns (PaymentProvidersResponse) {}
+
+  rpc getVolunteerCities(VolunteerIdRequest) returns (CitiesResponse) {}
+
+  rpc getVolunteerActivities(VolunteerIdRequest) returns (ActivitiesResponse) {}
+
+  rpc getVolunteerSocial(VolunteerIdRequest) returns (VolunteerSocialResponse) {}
+
+  rpc getVolunteerPaymentOptions(VolunteerIdRequest) returns (VolunteerPaymentOptionResponse) {}
+
   rpc getVolunteersByIds(GetByIdsRequest) returns (VolunteersResponse) {}
 
   rpc addPaymentOption(AddPaymentOptionRequest) returns (VolunteerResponse) {}
@@ -12,42 +28,22 @@ service VolunteerServiceRPC {
   rpc updatePaymentOption(UpdatePaymentOptionRequest) returns (VolunteerResponse) {}
 
   rpc deletePaymentOption(DeletePaymentOptionRequest) returns (VolunteerResponse) {}
-
-  rpc getActivitiesByIds(GetByIdsRequest) returns (ActivitiesResponse) {}
-
-  rpc getPaymentOptionsByIds(GetByIdsRequest) returns (PaymentOptionsResponse) {}
-
-  rpc getCitiesByIds(GetByIdsRequest) returns (CitiesResponse) {}
 }
 
+// Shared
 message GetByIdsRequest {
   repeated string ids = 1;
 }
 
-message SearchVolunteersRequest {
-  repeated string cityIds = 1;
-  repeated string activityIds = 2;
-  repeated string paymentOptionIds = 3;
-}
-
-message ActivitiesResponse {
-  repeated VolunteerActivity activities = 1;
-}
-
-message PaymentOptionsResponse {
-  repeated PaymentOption paymentOptions = 1;
-}
-
-message CitiesResponse {
-  repeated City cities = 1;
-}
-
+// Volunteer
 message VolunteerDto {
   string id = 1;
   string name = 2;
-  repeated string cityIds = 3;
-  repeated string activityIds = 4;
-  repeated string paymentOptionIds = 5;
+  string verificationState = 3;
+  repeated CityDto cities = 4;
+  repeated ActivityDto activities = 5;
+  repeated VolunteerSocialDto social = 6;
+  repeated VolunteerPaymentOptionDto paymentOption = 7;
 }
 
 message VolunteersResponse {
@@ -58,59 +54,84 @@ message VolunteerResponse {
   VolunteerDto volunteer = 1;
 }
 
-message VolunteerActivity {
+message VolunteerIdRequest {
+  string volunteerId = 1;
+}
+
+// Activity
+message ActivityDto {
+  string id = 1;
+  string title = 2;
+  VolunteerDto volunteers = 3;
+}
+
+message ActivitiesResponse {
+  repeated ActivityDto activities = 1;
+}
+
+// City
+message CityDto {
+  string id = 1;
+  string title = 2;
+  VolunteerDto volunteers = 3;
+}
+
+message CitiesResponse {
+  repeated CityDto cities = 1;
+}
+
+// PaymentProvider
+message PaymentProviderDto {
   string id = 1;
   string title = 2;
 }
 
-message PaymentOption {
+message PaymentProvidersResponse {
+  repeated PaymentProviderDto paymentProvider = 1;
+}
+
+// SocialProvider
+message SocialProviderDto {
   string id = 1;
-  PaymentOptionType type = 2;
-  repeated PaymentOptionValue values = 3;
+  string provider = 2;
+  VolunteerSocialDto volunteerSocial = 3;
 }
 
-enum PaymentOptionType {
-  bankCard = 0;
-  bitcoin = 1;
-  westernUnion = 2;
+message SocialProvidersResponse {
+  repeated SocialProviderDto socialProviders = 1;
 }
 
-message PaymentOptionValue {
+// VolunteerSocial
+message VolunteerSocialDto {
   string id = 1;
-  string key = 2;
-  string value = 3;
-}
-
-message AddPaymentOptionRequest {
-  PaymentOptionType type = 1;
-  repeated PaymentOptionValue values = 2;
-  string volunteerId = 3;
-}
-
-message UpdatePaymentOptionRequest {
-  string id = 1;
-  PaymentOptionType type = 2;
-  repeated PaymentOptionValue values = 3;
+  string url = 2;
+  PaymentProviderDto providers = 3;
   string volunteerId = 4;
 }
 
-message DeletePaymentOptionRequest {
+message VolunteerSocialResponse {
+  repeated VolunteerSocialDto volunteerSocial = 1;
+}
+
+// VolunteerPaymentOption
+message VolunteerPaymentOptionDto {
   string id = 1;
+  string metadata = 2;
+  PaymentProviderDto paymentProviders = 3;
+  string volunteerId = 4;
 }
 
-message City {
-  string id = 1;
-  string title = 2;
+message VolunteerPaymentOptionResponse {
+  repeated VolunteerPaymentOptionDto paymentOptions = 1;
 }
 
-enum VerificationState {
-  requested = 0;
-  inProgress = 1;
-  verified = 2;
-  rejected = 3;
-}
+message AddPaymentOptionRequest {}
+message UpdatePaymentOptionRequest {}
+message DeletePaymentOptionRequest {}
 
-enum SocialProvider {
-  instagram = 0;
-  google = 1;
+// search
+message SearchVolunteersRequest {
+  repeated string cityIds = 1;
+  repeated string activityIds = 2;
+  repeated string paymentOptionIds = 3;
 }
