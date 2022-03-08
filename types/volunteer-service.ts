@@ -34,7 +34,7 @@ export interface GetByIdsRequest {
 export interface SearchVolunteersRequest {
   city: string;
   activityType: string[];
-  PaymentOptions: string[];
+  paymentOptions: string[];
 }
 
 export interface ActivitiesResponse {
