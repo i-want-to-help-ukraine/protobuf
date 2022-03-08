@@ -3,114 +3,95 @@ syntax = "proto3";
 package VolunteerServicePackage;
 
 service VolunteerServiceRPC {
-  rpc searchVolunteers(SearchVolunteersRequest) returns (SearchVolunteersResponse) {}
+  rpc search(SearchVolunteersRequest) returns (VolunteersResponse) {}
 
-  rpc getVolunteersByIds(GetVolunteersByIdsRequest) returns (GetVolunteersByIdsResponse) {}
+  rpc getVolunteersByIds(GetByIdsRequest) returns (VolunteersResponse) {}
 
-  rpc addDonateOption(AddDonateOptionRequest) returns (AddDonateOptionResponse) {}
+  rpc addPaymentOption(AddPaymentOptionRequest) returns (VolunteerResponse) {}
 
-  rpc updateDonateOptions(UpdateDonateOptionRequest) returns (UpdateDonateOptionResponse) {}
+  rpc updatePaymentOption(UpdatePaymentOptionRequest) returns (VolunteerResponse) {}
 
-  rpc deleteDonateOption(DeleteDonateOptionRequest) returns (DeleteDonateOptionResponse) {}
+  rpc deletePaymentOption(DeletePaymentOptionRequest) returns (VolunteerResponse) {}
 
-  rpc getVolunteerActivitiesByIds(GetVolunteerActivitiesByIdsRequest) returns (GetVolunteerActivitiesByIdsResponse) {}
+  rpc getActivitiesByIds(GetActivitiesByIdsRequest) returns (VolunteerResponse) {}
+
+  rpc getPaymentOptionsByIds(GetByIdsRequest) returns (VolunteerResponse) {}
 }
 
-// getVolunteersByIds
-message VolunteerDto {
-  string id = 1;
-  string name = 2;
-  repeated VolunteerActivity activities = 3;
-  repeated DonateOption donateOptions = 4;
-}
-
-message GetVolunteersByIdsRequest {
+message GetByIdsRequest {
   repeated string ids = 1;
 }
 
-message GetVolunteersByIdsResponse {
+message SearchVolunteersRequest {
+  string city = 1;
+  repeated string activityType = 2;
+  repeated string PaymentOptions = 3;
+}
+
+message VolunteerDto {
+  string id = 1;
+  string name = 2;
+  repeated string activityIds = 3;
+  repeated string paymentOptionIds = 4;
+}
+
+message VolunteersResponse {
   repeated VolunteerDto volunteers = 1;
 }
 
-// Volunteer activities
+message VolunteerResponse {
+  VolunteerDto volunteer = 1;
+}
+
 message VolunteerActivity {
   string id = 1;
   string title = 2;
 }
 
-message GetVolunteerActivitiesByIdsRequest {
+message GetActivitiesByIdsRequest {
   repeated string ids = 1;
 }
 
-message GetVolunteerActivitiesByIdsResponse {
-  repeated VolunteerActivity volunteerActivities = 1;
-}
-
-// DonateOption
-message DonateOption {
+message PaymentOption {
   string id = 1;
-  DonateOptionType type = 2;
-  repeated DonateOptionValue values = 3;
+  PaymentOptionType type = 2;
+  repeated PaymentOptionValue values = 3;
 }
 
-enum DonateOptionType {
+enum PaymentOptionType {
   bankCard = 0;
   bitcoin = 1;
   westernUnion = 2;
 }
 
-message DonateOptionValue {
+message PaymentOptionValue {
   string id = 1;
   string key = 2;
   string value = 3;
 }
 
-// addDonateOption
-message AddDonateOptionRequest {
-  DonateOptionType type = 1;
-  repeated DonateOptionValue values = 2;
+message AddPaymentOptionRequest {
+  PaymentOptionType type = 1;
+  repeated PaymentOptionValue values = 2;
   string volunteerId = 3;
 }
 
-message AddDonateOptionResponse {
-  VolunteerDto volunteerDto = 1;
-}
-
-// updateDonateOptions
-message UpdateDonateOptionRequest {
+message UpdatePaymentOptionRequest {
   string id = 1;
-  DonateOptionType type = 2;
-  repeated DonateOptionValue values = 3;
+  PaymentOptionType type = 2;
+  repeated PaymentOptionValue values = 3;
   string volunteerId = 4;
 }
 
-message UpdateDonateOptionResponse {
-  VolunteerDto volunteerDto = 1;
-}
-
-// updateDonateOptions
-message DeleteDonateOptionRequest {
+message DeletePaymentOptionRequest {
   string id = 1;
 }
 
-message DeleteDonateOptionResponse {}
-
-// searchVolunteers
-message SearchVolunteersRequest {
-  string city = 1;
-  repeated string activityType = 2;
-  repeated string donateOptions = 3;
-}
-
-message SearchVolunteersResponse {
-  repeated VolunteerDto volunteers = 1;
-}
-
 enum VerificationState {
-    requested = 0;
-    inProgress = 1;
-    verified = 2;
-    rejected = 3;
+  requested = 0;
+  inProgress = 1;
+  verified = 2;
+  rejected = 3;
 }
 
 enum SocialProvider {
