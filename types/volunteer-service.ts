@@ -49,9 +49,13 @@ export interface VolunteerActivity {
   title: string;
 }
 
-export interface GetVolunteerActivitiesByIdsRequest {}
+export interface GetVolunteerActivitiesByIdsRequest {
+  ids: string[];
+}
 
-export interface GetVolunteerActivitiesByIdsResponse {}
+export interface GetVolunteerActivitiesByIdsResponse {
+  volunteerActivities: VolunteerActivity[];
+}
 
 /** DonateOption */
 export interface DonateOption {
