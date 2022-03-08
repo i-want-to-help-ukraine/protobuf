@@ -32,9 +32,9 @@ export interface GetByIdsRequest {
 }
 
 export interface SearchVolunteersRequest {
-  city: string;
-  activityType: string[];
-  paymentOptions: string[];
+  cityIds: string[];
+  activityIds: string[];
+  paymentOptionIds: string[];
 }
 
 export interface ActivitiesResponse {

@@ -23,9 +23,9 @@ message GetByIdsRequest {
 }
 
 message SearchVolunteersRequest {
-  string city = 1;
-  repeated string activityType = 2;
-  repeated string paymentOptions = 3;
+  repeated string cityIds = 1;
+  repeated string activityIds = 2;
+  repeated string paymentOptionIds = 3;
 }
 
 message ActivitiesResponse {
