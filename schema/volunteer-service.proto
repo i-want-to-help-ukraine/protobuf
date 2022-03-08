@@ -16,6 +16,8 @@ service VolunteerServiceRPC {
   rpc getActivitiesByIds(GetByIdsRequest) returns (ActivitiesResponse) {}
 
   rpc getPaymentOptionsByIds(GetByIdsRequest) returns (PaymentOptionsResponse) {}
+
+  rpc getCitiesByIds(GetByIdsRequest) returns (CitiesResponse) {}
 }
 
 message GetByIdsRequest {
@@ -36,10 +38,14 @@ message PaymentOptionsResponse {
   repeated PaymentOption paymentOptions = 1;
 }
 
+message CitiesResponse {
+  repeated City cities = 1;
+}
+
 message VolunteerDto {
   string id = 1;
   string name = 2;
-  City city = 3;
+  repeated string cityIds = 3;
   repeated string activityIds = 4;
   repeated string paymentOptionIds = 5;
 }
