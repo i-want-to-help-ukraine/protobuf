@@ -39,7 +39,7 @@ export interface GetVolunteersByIdsRequest {
   ids: string[];
 }
 
-export interface GetVolunteersByIds {
+export interface GetVolunteersByIdsResponse {
   volunteers: VolunteerDto[];
 }
 
@@ -116,7 +116,7 @@ export interface VolunteerServiceRPCClient {
 
   getVolunteersByIds(
     request: GetVolunteersByIdsRequest
-  ): Observable<GetVolunteersByIds>;
+  ): Observable<GetVolunteersByIdsResponse>;
 
   addDonateOption(
     request: AddDonateOptionRequest
@@ -146,9 +146,9 @@ export interface VolunteerServiceRPCController {
   getVolunteersByIds(
     request: GetVolunteersByIdsRequest
   ):
-    | Promise<GetVolunteersByIds>
-    | Observable<GetVolunteersByIds>
-    | GetVolunteersByIds;
+    | Promise<GetVolunteersByIdsResponse>
+    | Observable<GetVolunteersByIdsResponse>
+    | GetVolunteersByIdsResponse;
 
   addDonateOption(
     request: AddDonateOptionRequest

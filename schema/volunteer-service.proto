@@ -5,7 +5,7 @@ package VolunteerServicePackage;
 service VolunteerServiceRPC {
   rpc searchVolunteers(SearchVolunteersRequest) returns (SearchVolunteersResponse) {}
 
-  rpc getVolunteersByIds(GetVolunteersByIdsRequest) returns (GetVolunteersByIds) {}
+  rpc getVolunteersByIds(GetVolunteersByIdsRequest) returns (GetVolunteersByIdsResponse) {}
 
   rpc addDonateOption(AddDonateOptionRequest) returns (AddDonateOptionResponse) {}
 
@@ -28,7 +28,7 @@ message GetVolunteersByIdsRequest {
   repeated string ids = 1;
 }
 
-message GetVolunteersByIds {
+message GetVolunteersByIdsResponse {
   repeated VolunteerDto volunteers = 1;
 }
 
