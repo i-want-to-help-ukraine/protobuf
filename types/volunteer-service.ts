@@ -37,6 +37,14 @@ export interface SearchVolunteersRequest {
   PaymentOptions: string[];
 }
 
+export interface ActivitiesResponse {
+  activities: VolunteerActivity[];
+}
+
+export interface PaymentOptionsResponse {
+  paymentOptions: PaymentOption[];
+}
+
 export interface VolunteerDto {
   id: string;
   name: string;
@@ -55,10 +63,6 @@ export interface VolunteerResponse {
 export interface VolunteerActivity {
   id: string;
   title: string;
-}
-
-export interface GetActivitiesByIdsRequest {
-  ids: string[];
 }
 
 export interface PaymentOption {
@@ -109,13 +113,11 @@ export interface VolunteerServiceRPCClient {
     request: DeletePaymentOptionRequest
   ): Observable<VolunteerResponse>;
 
-  getActivitiesByIds(
-    request: GetActivitiesByIdsRequest
-  ): Observable<VolunteerResponse>;
+  getActivitiesByIds(request: GetByIdsRequest): Observable<ActivitiesResponse>;
 
   getPaymentOptionsByIds(
     request: GetByIdsRequest
-  ): Observable<VolunteerResponse>;
+  ): Observable<PaymentOptionsResponse>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -155,18 +157,18 @@ export interface VolunteerServiceRPCController {
     | VolunteerResponse;
 
   getActivitiesByIds(
-    request: GetActivitiesByIdsRequest
+    request: GetByIdsRequest
   ):
-    | Promise<VolunteerResponse>
-    | Observable<VolunteerResponse>
-    | VolunteerResponse;
+    | Promise<ActivitiesResponse>
+    | Observable<ActivitiesResponse>
+    | ActivitiesResponse;
 
   getPaymentOptionsByIds(
     request: GetByIdsRequest
   ):
-    | Promise<VolunteerResponse>
-    | Observable<VolunteerResponse>
-    | VolunteerResponse;
+    | Promise<PaymentOptionsResponse>
+    | Observable<PaymentOptionsResponse>
+    | PaymentOptionsResponse;
 }
 
 export function VolunteerServiceRPCControllerMethods() {

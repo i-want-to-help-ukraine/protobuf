@@ -13,9 +13,9 @@ service VolunteerServiceRPC {
 
   rpc deletePaymentOption(DeletePaymentOptionRequest) returns (VolunteerResponse) {}
 
-  rpc getActivitiesByIds(GetActivitiesByIdsRequest) returns (VolunteerResponse) {}
+  rpc getActivitiesByIds(GetByIdsRequest) returns (ActivitiesResponse) {}
 
-  rpc getPaymentOptionsByIds(GetByIdsRequest) returns (VolunteerResponse) {}
+  rpc getPaymentOptionsByIds(GetByIdsRequest) returns (PaymentOptionsResponse) {}
 }
 
 message GetByIdsRequest {
@@ -26,6 +26,14 @@ message SearchVolunteersRequest {
   string city = 1;
   repeated string activityType = 2;
   repeated string PaymentOptions = 3;
+}
+
+message ActivitiesResponse {
+  repeated VolunteerActivity activities = 1;
+}
+
+message PaymentOptionsResponse {
+  repeated PaymentOption paymentOptions = 1;
 }
 
 message VolunteerDto {
@@ -46,10 +54,6 @@ message VolunteerResponse {
 message VolunteerActivity {
   string id = 1;
   string title = 2;
-}
-
-message GetActivitiesByIdsRequest {
-  repeated string ids = 1;
 }
 
 message PaymentOption {
