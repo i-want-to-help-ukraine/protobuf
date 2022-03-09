@@ -22,6 +22,8 @@ export interface CreateVolunteerDto {
   name: string;
   citiesIds: string[];
   activitiesIds: string[];
+  social: string[];
+  paymentOptions: string[];
 }
 
 export interface VolunteersResponse {

@@ -48,6 +48,8 @@ message CreateVolunteerDto {
   string name = 1;
   repeated string citiesIds = 2;
   repeated string activitiesIds = 3;
+  repeated string social = 4;
+  repeated string paymentOptions = 5;
 }
 
 message VolunteersResponse {
