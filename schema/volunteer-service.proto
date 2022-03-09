@@ -57,13 +57,11 @@ message CreateVolunteerDto {
 message CreateVolunteerSocialDto {
   string url = 1;
   string socialProviderId = 2;
-  string volunteerId = 3;
 }
 
 message CreateVolunteerPaymentOptionDto {
   google.protobuf.Struct metadata = 1;
   string paymentOptionId = 2;
-  string volunteerId = 3;
 }
 
 message VolunteersResponseDto {

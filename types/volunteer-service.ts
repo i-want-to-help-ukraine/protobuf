@@ -29,13 +29,11 @@ export interface CreateVolunteerDto {
 export interface CreateVolunteerSocialDto {
   url: string;
   socialProviderId: string;
-  volunteerId: string;
 }
 
 export interface CreateVolunteerPaymentOptionDto {
   metadata?: { [key: string]: any };
   paymentOptionId: string;
-  volunteerId: string;
 }
 
 export interface VolunteersResponseDto {
