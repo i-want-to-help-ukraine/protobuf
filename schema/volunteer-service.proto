@@ -1,39 +1,41 @@
 syntax = "proto3";
 
+import "google/protobuf/struct.proto";
+
 package VolunteerServicePackage;
 
 service VolunteerServiceRPC {
-  rpc search(SearchVolunteersRequest) returns (VolunteersResponse) {}
+  rpc search(SearchVolunteersDto) returns (VolunteersResponseDto) {}
 
-  rpc getCities(GetByIdsRequest) returns (CitiesResponse) {}
+  rpc getCities(GetByIdsDto) returns (CitiesDto) {}
 
-  rpc getActivities(GetByIdsRequest) returns (ActivitiesResponse) {}
+  rpc getActivities(GetByIdsDto) returns (ActivitiesDto) {}
 
-  rpc getSocialProviders(GetByIdsRequest) returns (SocialProvidersResponse) {}
+  rpc getSocialProviders(GetByIdsDto) returns (SocialProvidersDto) {}
 
-  rpc getPaymentProviders(GetByIdsRequest) returns (PaymentProvidersResponse) {}
+  rpc getPaymentProviders(GetByIdsDto) returns (PaymentProvidersDto) {}
 
-  rpc getVolunteerCities(VolunteerIdRequest) returns (CitiesResponse) {}
+  rpc getVolunteerCities(VolunteerIdRequestDto) returns (CitiesDto) {}
 
-  rpc getVolunteerActivities(VolunteerIdRequest) returns (ActivitiesResponse) {}
+  rpc getVolunteerActivities(VolunteerIdRequestDto) returns (ActivitiesDto) {}
 
-  rpc getVolunteerSocial(VolunteerIdRequest) returns (VolunteerSocialResponse) {}
+  rpc getVolunteerSocial(VolunteerIdRequestDto) returns (VolunteerSocialResponseDto) {}
 
-  rpc getVolunteerPaymentOptions(VolunteerIdRequest) returns (VolunteerPaymentOptionResponse) {}
+  rpc getVolunteerPaymentOptions(VolunteerIdRequestDto) returns (VolunteerPaymentOptionResponseDto) {}
 
-  rpc getVolunteersByIds(GetByIdsRequest) returns (VolunteersResponse) {}
+  rpc getVolunteersByIds(GetByIdsDto) returns (VolunteersResponseDto) {}
 
-  rpc addPaymentOption(AddPaymentOptionRequest) returns (VolunteerResponse) {}
+  rpc addPaymentOption(CreatePaymentOptionDto) returns (VolunteerResponseDto) {}
 
-  rpc updatePaymentOption(UpdatePaymentOptionRequest) returns (VolunteerResponse) {}
+  rpc updatePaymentOption(UpdatePaymentOptionDto) returns (VolunteerResponseDto) {}
 
-  rpc deletePaymentOption(DeletePaymentOptionRequest) returns (VolunteerResponse) {}
+  rpc deletePaymentOption(DeletePaymentOptionDto) returns (VolunteerResponseDto) {}
 
-  rpc createVolunteer(CreateVolunteerDto) returns (VolunteerResponse) {}
+  rpc createVolunteer(CreateVolunteerDto) returns (VolunteerResponseDto) {}
 }
 
 // Shared
-message GetByIdsRequest {
+message GetByIdsDto {
   repeated string ids = 1;
 }
 
@@ -48,19 +50,31 @@ message CreateVolunteerDto {
   string name = 1;
   repeated string citiesIds = 2;
   repeated string activitiesIds = 3;
-  repeated string social = 4;
-  repeated string paymentOptions = 5;
+  repeated CreateVolunteerSocialDto social = 4;
+  repeated CreateVolunteerPaymentOptionDto paymentOptions = 5;
 }
 
-message VolunteersResponse {
+message CreateVolunteerSocialDto {
+  string url = 1;
+  string socialProviderId = 2;
+  string volunteerId = 3;
+}
+
+message CreateVolunteerPaymentOptionDto {
+  google.protobuf.Struct metadata = 1;
+  string paymentOptionId = 2;
+  string volunteerId = 3;
+}
+
+message VolunteersResponseDto {
   repeated VolunteerDto volunteers = 1;
 }
 
-message VolunteerResponse {
+message VolunteerResponseDto {
   VolunteerDto volunteer = 1;
 }
 
-message VolunteerIdRequest {
+message VolunteerIdRequestDto {
   string volunteerId = 1;
 }
 
@@ -71,7 +85,7 @@ message ActivityDto {
   VolunteerDto volunteers = 3;
 }
 
-message ActivitiesResponse {
+message ActivitiesDto {
   repeated ActivityDto activities = 1;
 }
 
@@ -82,7 +96,7 @@ message CityDto {
   VolunteerDto volunteers = 3;
 }
 
-message CitiesResponse {
+message CitiesDto {
   repeated CityDto cities = 1;
 }
 
@@ -92,7 +106,7 @@ message PaymentProviderDto {
   string title = 2;
 }
 
-message PaymentProvidersResponse {
+message PaymentProvidersDto {
   repeated PaymentProviderDto paymentProvider = 1;
 }
 
@@ -100,10 +114,9 @@ message PaymentProvidersResponse {
 message SocialProviderDto {
   string id = 1;
   string title = 2;
-  VolunteerSocialDto volunteerSocial = 3;
 }
 
-message SocialProvidersResponse {
+message SocialProvidersDto {
   repeated SocialProviderDto socialProviders = 1;
 }
 
@@ -111,32 +124,30 @@ message SocialProvidersResponse {
 message VolunteerSocialDto {
   string id = 1;
   string url = 2;
-  PaymentProviderDto providers = 3;
   string volunteerId = 4;
 }
 
-message VolunteerSocialResponse {
+message VolunteerSocialResponseDto {
   repeated VolunteerSocialDto volunteerSocial = 1;
 }
 
 // VolunteerPaymentOption
 message VolunteerPaymentOptionDto {
   string id = 1;
-  string metadata = 2;
-  PaymentProviderDto paymentProviders = 3;
-  string volunteerId = 4;
+  google.protobuf.Struct metadata = 2;
+  string volunteerId = 3;
 }
 
-message VolunteerPaymentOptionResponse {
+message VolunteerPaymentOptionResponseDto {
   repeated VolunteerPaymentOptionDto paymentOptions = 1;
 }
 
-message AddPaymentOptionRequest {}
-message UpdatePaymentOptionRequest {}
-message DeletePaymentOptionRequest {}
+message CreatePaymentOptionDto {}
+message UpdatePaymentOptionDto {}
+message DeletePaymentOptionDto {}
 
 // search
-message SearchVolunteersRequest {
+message SearchVolunteersDto {
   repeated string cityIds = 1;
   repeated string activityIds = 2;
   repeated string paymentOptionIds = 3;
