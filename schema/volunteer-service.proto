@@ -74,7 +74,7 @@ message VolunteerResponseDto {
 }
 
 message VolunteerIdsRequestDto {
-  repeated string volunteerId = 1;
+  repeated string volunteerIds = 1;
 }
 
 // Activity

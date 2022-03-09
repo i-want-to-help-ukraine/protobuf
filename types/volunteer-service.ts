@@ -46,7 +46,7 @@ export interface VolunteerResponseDto {
 }
 
 export interface VolunteerIdsRequestDto {
-  volunteerId: string[];
+  volunteerIds: string[];
 }
 
 /** Activity */
