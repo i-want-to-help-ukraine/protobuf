@@ -16,13 +16,13 @@ service VolunteerServiceRPC {
 
   rpc getPaymentProviders(google.protobuf.Empty) returns (PaymentProvidersDto) {}
 
-  rpc getVolunteerCities(VolunteerIdRequestDto) returns (CitiesDto) {}
+  rpc getVolunteerCities(VolunteerIdsRequestDto) returns (CitiesDto) {}
 
-  rpc getVolunteerActivities(VolunteerIdRequestDto) returns (ActivitiesDto) {}
+  rpc getVolunteerActivities(VolunteerIdsRequestDto) returns (ActivitiesDto) {}
 
-  rpc getVolunteerSocial(VolunteerIdRequestDto) returns (VolunteerSocialResponseDto) {}
+  rpc getVolunteerSocial(VolunteerIdsRequestDto) returns (VolunteerSocialResponseDto) {}
 
-  rpc getVolunteerPaymentOptions(VolunteerIdRequestDto) returns (VolunteerPaymentOptionResponseDto) {}
+  rpc getVolunteerPaymentOptions(VolunteerIdsRequestDto) returns (VolunteerPaymentOptionResponseDto) {}
 
   rpc getVolunteersByIds(GetByIdsDto) returns (VolunteersResponseDto) {}
 
@@ -73,8 +73,8 @@ message VolunteerResponseDto {
   VolunteerDto volunteer = 1;
 }
 
-message VolunteerIdRequestDto {
-  string volunteerId = 1;
+message VolunteerIdsRequestDto {
+  repeated string volunteerId = 1;
 }
 
 // Activity

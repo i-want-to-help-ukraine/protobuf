@@ -45,8 +45,8 @@ export interface VolunteerResponseDto {
   volunteer?: VolunteerDto;
 }
 
-export interface VolunteerIdRequestDto {
-  volunteerId: string;
+export interface VolunteerIdsRequestDto {
+  volunteerId: string[];
 }
 
 /** Activity */
@@ -139,18 +139,18 @@ export interface VolunteerServiceRPCClient {
 
   getPaymentProviders(request: Empty): Observable<PaymentProvidersDto>;
 
-  getVolunteerCities(request: VolunteerIdRequestDto): Observable<CitiesDto>;
+  getVolunteerCities(request: VolunteerIdsRequestDto): Observable<CitiesDto>;
 
   getVolunteerActivities(
-    request: VolunteerIdRequestDto
+    request: VolunteerIdsRequestDto
   ): Observable<ActivitiesDto>;
 
   getVolunteerSocial(
-    request: VolunteerIdRequestDto
+    request: VolunteerIdsRequestDto
   ): Observable<VolunteerSocialResponseDto>;
 
   getVolunteerPaymentOptions(
-    request: VolunteerIdRequestDto
+    request: VolunteerIdsRequestDto
   ): Observable<VolunteerPaymentOptionResponseDto>;
 
   getVolunteersByIds(request: GetByIdsDto): Observable<VolunteersResponseDto>;
@@ -203,22 +203,22 @@ export interface VolunteerServiceRPCController {
     | PaymentProvidersDto;
 
   getVolunteerCities(
-    request: VolunteerIdRequestDto
+    request: VolunteerIdsRequestDto
   ): Promise<CitiesDto> | Observable<CitiesDto> | CitiesDto;
 
   getVolunteerActivities(
-    request: VolunteerIdRequestDto
+    request: VolunteerIdsRequestDto
   ): Promise<ActivitiesDto> | Observable<ActivitiesDto> | ActivitiesDto;
 
   getVolunteerSocial(
-    request: VolunteerIdRequestDto
+    request: VolunteerIdsRequestDto
   ):
     | Promise<VolunteerSocialResponseDto>
     | Observable<VolunteerSocialResponseDto>
     | VolunteerSocialResponseDto;
 
   getVolunteerPaymentOptions(
-    request: VolunteerIdRequestDto
+    request: VolunteerIdsRequestDto
   ):
     | Promise<VolunteerPaymentOptionResponseDto>
     | Observable<VolunteerPaymentOptionResponseDto>
