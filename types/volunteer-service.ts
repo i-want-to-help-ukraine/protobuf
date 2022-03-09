@@ -22,6 +22,12 @@ export interface VolunteerDto {
   paymentOption: VolunteerPaymentOptionDto[];
 }
 
+export interface CreateVolunteerDto {
+  name: string;
+  citiesIds: string[];
+  activitiesIds: string[];
+}
+
 export interface VolunteersResponse {
   volunteers: VolunteerDto[];
 }
@@ -69,7 +75,7 @@ export interface PaymentProvidersResponse {
 /** SocialProvider */
 export interface SocialProviderDto {
   id: string;
-  provider: string;
+  title: string;
   volunteerSocial?: VolunteerSocialDto;
 }
 
@@ -158,6 +164,8 @@ export interface VolunteerServiceRPCClient {
   deletePaymentOption(
     request: DeletePaymentOptionRequest
   ): Observable<VolunteerResponse>;
+
+  createVolunteer(request: CreateVolunteerDto): Observable<VolunteerResponse>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -245,6 +253,13 @@ export interface VolunteerServiceRPCController {
     | Promise<VolunteerResponse>
     | Observable<VolunteerResponse>
     | VolunteerResponse;
+
+  createVolunteer(
+    request: CreateVolunteerDto
+  ):
+    | Promise<VolunteerResponse>
+    | Observable<VolunteerResponse>
+    | VolunteerResponse;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
@@ -263,6 +278,7 @@ export function VolunteerServiceRPCControllerMethods() {
       "addPaymentOption",
       "updatePaymentOption",
       "deletePaymentOption",
+      "createVolunteer",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(

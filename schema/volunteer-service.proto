@@ -28,6 +28,8 @@ service VolunteerServiceRPC {
   rpc updatePaymentOption(UpdatePaymentOptionRequest) returns (VolunteerResponse) {}
 
   rpc deletePaymentOption(DeletePaymentOptionRequest) returns (VolunteerResponse) {}
+
+  rpc createVolunteer(CreateVolunteerDto) returns (VolunteerResponse) {}
 }
 
 // Shared
@@ -44,6 +46,12 @@ message VolunteerDto {
   repeated ActivityDto activities = 5;
   repeated VolunteerSocialDto social = 6;
   repeated VolunteerPaymentOptionDto paymentOption = 7;
+}
+
+message CreateVolunteerDto {
+  string name = 1;
+  repeated string citiesIds = 2;
+  repeated string activitiesIds = 3;
 }
 
 message VolunteersResponse {
@@ -93,7 +101,7 @@ message PaymentProvidersResponse {
 // SocialProvider
 message SocialProviderDto {
   string id = 1;
-  string provider = 2;
+  string title = 2;
   VolunteerSocialDto volunteerSocial = 3;
 }
 
