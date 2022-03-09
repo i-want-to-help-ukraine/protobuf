@@ -42,10 +42,6 @@ message VolunteerDto {
   string id = 1;
   string name = 2;
   string verificationState = 3;
-  repeated CityDto cities = 4;
-  repeated ActivityDto activities = 5;
-  repeated VolunteerSocialDto social = 6;
-  repeated VolunteerPaymentOptionDto paymentOption = 7;
 }
 
 message CreateVolunteerDto {

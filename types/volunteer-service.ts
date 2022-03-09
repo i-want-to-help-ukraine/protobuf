@@ -16,10 +16,6 @@ export interface VolunteerDto {
   id: string;
   name: string;
   verificationState: string;
-  cities: CityDto[];
-  activities: ActivityDto[];
-  social: VolunteerSocialDto[];
-  paymentOption: VolunteerPaymentOptionDto[];
 }
 
 export interface CreateVolunteerDto {
