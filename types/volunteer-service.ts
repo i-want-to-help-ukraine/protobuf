@@ -3,6 +3,7 @@ import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { util, configure } from "protobufjs/minimal";
 import * as Long from "long";
 import { Observable } from "rxjs";
+import { Empty } from "./google/protobuf/empty";
 
 export const protobufPackage = "VolunteerServicePackage";
 
@@ -130,13 +131,13 @@ export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 export interface VolunteerServiceRPCClient {
   search(request: SearchVolunteersDto): Observable<VolunteersResponseDto>;
 
-  getCities(request: GetByIdsDto): Observable<CitiesDto>;
+  getCities(request: Empty): Observable<CitiesDto>;
 
-  getActivities(request: GetByIdsDto): Observable<ActivitiesDto>;
+  getActivities(request: Empty): Observable<ActivitiesDto>;
 
-  getSocialProviders(request: GetByIdsDto): Observable<SocialProvidersDto>;
+  getSocialProviders(request: Empty): Observable<SocialProvidersDto>;
 
-  getPaymentProviders(request: GetByIdsDto): Observable<PaymentProvidersDto>;
+  getPaymentProviders(request: Empty): Observable<PaymentProvidersDto>;
 
   getVolunteerCities(request: VolunteerIdRequestDto): Observable<CitiesDto>;
 
@@ -180,22 +181,22 @@ export interface VolunteerServiceRPCController {
     | VolunteersResponseDto;
 
   getCities(
-    request: GetByIdsDto
+    request: Empty
   ): Promise<CitiesDto> | Observable<CitiesDto> | CitiesDto;
 
   getActivities(
-    request: GetByIdsDto
+    request: Empty
   ): Promise<ActivitiesDto> | Observable<ActivitiesDto> | ActivitiesDto;
 
   getSocialProviders(
-    request: GetByIdsDto
+    request: Empty
   ):
     | Promise<SocialProvidersDto>
     | Observable<SocialProvidersDto>
     | SocialProvidersDto;
 
   getPaymentProviders(
-    request: GetByIdsDto
+    request: Empty
   ):
     | Promise<PaymentProvidersDto>
     | Observable<PaymentProvidersDto>

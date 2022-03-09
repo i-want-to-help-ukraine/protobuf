@@ -1,19 +1,20 @@
 syntax = "proto3";
 
 import "google/protobuf/struct.proto";
+import "google/protobuf/empty.proto";
 
 package VolunteerServicePackage;
 
 service VolunteerServiceRPC {
   rpc search(SearchVolunteersDto) returns (VolunteersResponseDto) {}
 
-  rpc getCities(GetByIdsDto) returns (CitiesDto) {}
+  rpc getCities(google.protobuf.Empty) returns (CitiesDto) {}
 
-  rpc getActivities(GetByIdsDto) returns (ActivitiesDto) {}
+  rpc getActivities(google.protobuf.Empty) returns (ActivitiesDto) {}
 
-  rpc getSocialProviders(GetByIdsDto) returns (SocialProvidersDto) {}
+  rpc getSocialProviders(google.protobuf.Empty) returns (SocialProvidersDto) {}
 
-  rpc getPaymentProviders(GetByIdsDto) returns (PaymentProvidersDto) {}
+  rpc getPaymentProviders(google.protobuf.Empty) returns (PaymentProvidersDto) {}
 
   rpc getVolunteerCities(VolunteerIdRequestDto) returns (CitiesDto) {}
 
