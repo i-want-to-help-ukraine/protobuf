@@ -25,6 +25,7 @@ export interface CreateVolunteerDto {
   activitiesIds: string[];
   social: CreateVolunteerSocialDto[];
   paymentOptions: CreateVolunteerPaymentOptionDto[];
+  contacts: CreateVolunteerContactDto[];
 }
 
 export interface CreateVolunteerSocialDto {
@@ -37,8 +38,17 @@ export interface CreateVolunteerPaymentOptionDto {
   paymentOptionId: string;
 }
 
+export interface CreateVolunteerContactDto {
+  metadata?: { [key: string]: any };
+  contactProviderId: string;
+}
+
 export interface VolunteersResponseDto {
   volunteers: VolunteerDto[];
+}
+
+export interface ContactsResponseDto {
+  contacts: VolunteerContact[];
 }
 
 export interface VolunteerResponseDto {
@@ -91,6 +101,12 @@ export interface SocialProvidersDto {
   socialProviders: SocialProviderDto[];
 }
 
+/** ContactProvider */
+export interface ContactProviderDto {
+  id: string;
+  title: string;
+}
+
 /** VolunteerSocial */
 export interface VolunteerSocialDto {
   id: string;
@@ -118,6 +134,13 @@ export interface CreatePaymentOptionDto {}
 export interface UpdatePaymentOptionDto {}
 
 export interface DeletePaymentOptionDto {}
+
+/** VolunteerContact */
+export interface VolunteerContact {
+  id: string;
+  metadata?: { [key: string]: any };
+  volunteerId: string;
+}
 
 /** search */
 export interface SearchVolunteersDto {
@@ -153,6 +176,8 @@ export interface VolunteerServiceRPCClient {
   ): Observable<VolunteerPaymentOptionResponseDto>;
 
   getVolunteersByIds(request: GetByIdsDto): Observable<VolunteersResponseDto>;
+
+  getVolunteerContacts(request: GetByIdsDto): Observable<ContactsResponseDto>;
 
   addPaymentOption(
     request: CreatePaymentOptionDto
@@ -230,6 +255,13 @@ export interface VolunteerServiceRPCController {
     | Observable<VolunteersResponseDto>
     | VolunteersResponseDto;
 
+  getVolunteerContacts(
+    request: GetByIdsDto
+  ):
+    | Promise<ContactsResponseDto>
+    | Observable<ContactsResponseDto>
+    | ContactsResponseDto;
+
   addPaymentOption(
     request: CreatePaymentOptionDto
   ):
@@ -272,6 +304,7 @@ export function VolunteerServiceRPCControllerMethods() {
       "getVolunteerSocial",
       "getVolunteerPaymentOptions",
       "getVolunteersByIds",
+      "getVolunteerContacts",
       "addPaymentOption",
       "updatePaymentOption",
       "deletePaymentOption",

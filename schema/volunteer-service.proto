@@ -26,6 +26,8 @@ service VolunteerServiceRPC {
 
   rpc getVolunteersByIds(GetByIdsDto) returns (VolunteersResponseDto) {}
 
+  rpc getVolunteerContacts(GetByIdsDto) returns (ContactsResponseDto) {}
+
   rpc addPaymentOption(CreatePaymentOptionDto) returns (VolunteerResponseDto) {}
 
   rpc updatePaymentOption(UpdatePaymentOptionDto) returns (VolunteerResponseDto) {}
@@ -53,6 +55,7 @@ message CreateVolunteerDto {
   repeated string activitiesIds = 3;
   repeated CreateVolunteerSocialDto social = 4;
   repeated CreateVolunteerPaymentOptionDto paymentOptions = 5;
+  repeated CreateVolunteerContactDto contacts = 6;
 }
 
 message CreateVolunteerSocialDto {
@@ -65,8 +68,17 @@ message CreateVolunteerPaymentOptionDto {
   string paymentOptionId = 2;
 }
 
+message CreateVolunteerContactDto {
+  google.protobuf.Struct metadata = 1;
+  string contactProviderId = 2;
+}
+
 message VolunteersResponseDto {
   repeated VolunteerDto volunteers = 1;
+}
+
+message ContactsResponseDto {
+  repeated VolunteerContact contacts = 1;
 }
 
 message VolunteerResponseDto {
@@ -119,6 +131,12 @@ message SocialProvidersDto {
   repeated SocialProviderDto socialProviders = 1;
 }
 
+// ContactProvider
+message ContactProviderDto {
+  string id = 1;
+  string title = 2;
+}
+
 // VolunteerSocial
 message VolunteerSocialDto {
   string id = 1;
@@ -144,6 +162,13 @@ message VolunteerPaymentOptionResponseDto {
 message CreatePaymentOptionDto {}
 message UpdatePaymentOptionDto {}
 message DeletePaymentOptionDto {}
+
+// VolunteerContact
+message VolunteerContact {
+  string id = 1;
+  google.protobuf.Struct metadata = 2;
+  string volunteerId = 3;
+}
 
 // search
 message SearchVolunteersDto {
