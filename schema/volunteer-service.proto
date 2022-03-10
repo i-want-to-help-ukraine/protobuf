@@ -24,9 +24,9 @@ service VolunteerServiceRPC {
 
   rpc getVolunteerPaymentOptions(VolunteerIdsRequestDto) returns (VolunteerPaymentOptionResponseDto) {}
 
-  rpc getVolunteersByIds(GetByIdsDto) returns (VolunteersResponseDto) {}
+  rpc getVolunteerContacts(VolunteerIdsRequestDto) returns (ContactsResponseDto) {}
 
-  rpc getVolunteerContacts(GetByIdsDto) returns (ContactsResponseDto) {}
+  rpc getVolunteersByIds(GetByIdsDto) returns (VolunteersResponseDto) {}
 
   rpc addPaymentOption(CreatePaymentOptionDto) returns (VolunteerResponseDto) {}
 
