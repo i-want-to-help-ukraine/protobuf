@@ -123,7 +123,6 @@ export interface DeletePaymentOptionDto {}
 export interface SearchVolunteersDto {
   cityIds: string[];
   activityIds: string[];
-  paymentOptionIds: string[];
 }
 
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";

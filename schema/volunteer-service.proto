@@ -149,5 +149,4 @@ message DeletePaymentOptionDto {}
 message SearchVolunteersDto {
   repeated string cityIds = 1;
   repeated string activityIds = 2;
-  repeated string paymentOptionIds = 3;
 }
