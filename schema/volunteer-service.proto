@@ -51,12 +51,13 @@ message VolunteerDto {
 }
 
 message CreateVolunteerDto {
-  string name = 1;
-  repeated string citiesIds = 2;
-  repeated string activitiesIds = 3;
-  repeated CreateVolunteerSocialDto social = 4;
-  repeated CreateVolunteerPaymentOptionDto paymentOptions = 5;
-  repeated CreateVolunteerContactDto contacts = 6;
+  string firstname = 1;
+  string lastname = 2;
+  repeated string citiesIds = 3;
+  repeated string activitiesIds = 4;
+  repeated CreateVolunteerSocialDto social = 5;
+  repeated CreateVolunteerPaymentOptionDto paymentOptions = 6;
+  repeated CreateVolunteerContactDto contacts = 7;
 }
 
 message CreateVolunteerSocialDto {

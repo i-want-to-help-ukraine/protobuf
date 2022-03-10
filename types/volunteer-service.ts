@@ -21,7 +21,8 @@ export interface VolunteerDto {
 }
 
 export interface CreateVolunteerDto {
-  name: string;
+  firstname: string;
+  lastname: string;
   citiesIds: string[];
   activitiesIds: string[];
   social: CreateVolunteerSocialDto[];
