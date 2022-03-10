@@ -45,8 +45,9 @@ message GetByIdsDto {
 // Volunteer
 message VolunteerDto {
   string id = 1;
-  string name = 2;
-  string verificationState = 3;
+  string firstname = 2;
+  string lastname = 3;
+  string verificationStatus = 4;
 }
 
 message CreateVolunteerDto {

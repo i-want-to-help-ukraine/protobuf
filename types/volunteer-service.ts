@@ -15,8 +15,9 @@ export interface GetByIdsDto {
 /** Volunteer */
 export interface VolunteerDto {
   id: string;
-  name: string;
-  verificationState: string;
+  firstname: string;
+  lastname: string;
+  verificationStatus: string;
 }
 
 export interface CreateVolunteerDto {
