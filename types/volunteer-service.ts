@@ -50,7 +50,7 @@ export interface VolunteersResponseDto {
 }
 
 export interface ContactsResponseDto {
-  contacts: VolunteerContact[];
+  contacts: VolunteerContactDto[];
 }
 
 export interface VolunteerResponseDto {
@@ -138,7 +138,7 @@ export interface UpdatePaymentOptionDto {}
 export interface DeletePaymentOptionDto {}
 
 /** VolunteerContact */
-export interface VolunteerContact {
+export interface VolunteerContactDto {
   id: string;
   metadata?: { [key: string]: any };
   volunteerId: string;

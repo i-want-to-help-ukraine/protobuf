@@ -80,7 +80,7 @@ message VolunteersResponseDto {
 }
 
 message ContactsResponseDto {
-  repeated VolunteerContact contacts = 1;
+  repeated VolunteerContactDto contacts = 1;
 }
 
 message VolunteerResponseDto {
@@ -166,7 +166,7 @@ message UpdatePaymentOptionDto {}
 message DeletePaymentOptionDto {}
 
 // VolunteerContact
-message VolunteerContact {
+message VolunteerContactDto {
   string id = 1;
   google.protobuf.Struct metadata = 2;
   string volunteerId = 3;
