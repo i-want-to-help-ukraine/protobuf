@@ -177,9 +177,11 @@ export interface VolunteerServiceRPCClient {
     request: VolunteerIdsRequestDto
   ): Observable<VolunteerPaymentOptionResponseDto>;
 
-  getVolunteersByIds(request: GetByIdsDto): Observable<VolunteersResponseDto>;
+  getVolunteerContacts(
+    request: VolunteerIdsRequestDto
+  ): Observable<ContactsResponseDto>;
 
-  getVolunteerContacts(request: GetByIdsDto): Observable<ContactsResponseDto>;
+  getVolunteersByIds(request: GetByIdsDto): Observable<VolunteersResponseDto>;
 
   addPaymentOption(
     request: CreatePaymentOptionDto
@@ -250,19 +252,19 @@ export interface VolunteerServiceRPCController {
     | Observable<VolunteerPaymentOptionResponseDto>
     | VolunteerPaymentOptionResponseDto;
 
+  getVolunteerContacts(
+    request: VolunteerIdsRequestDto
+  ):
+    | Promise<ContactsResponseDto>
+    | Observable<ContactsResponseDto>
+    | ContactsResponseDto;
+
   getVolunteersByIds(
     request: GetByIdsDto
   ):
     | Promise<VolunteersResponseDto>
     | Observable<VolunteersResponseDto>
     | VolunteersResponseDto;
-
-  getVolunteerContacts(
-    request: GetByIdsDto
-  ):
-    | Promise<ContactsResponseDto>
-    | Observable<ContactsResponseDto>
-    | ContactsResponseDto;
 
   addPaymentOption(
     request: CreatePaymentOptionDto
@@ -305,8 +307,8 @@ export function VolunteerServiceRPCControllerMethods() {
       "getVolunteerActivities",
       "getVolunteerSocial",
       "getVolunteerPaymentOptions",
-      "getVolunteersByIds",
       "getVolunteerContacts",
+      "getVolunteersByIds",
       "addPaymentOption",
       "updatePaymentOption",
       "deletePaymentOption",
