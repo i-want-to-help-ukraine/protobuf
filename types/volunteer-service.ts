@@ -23,8 +23,8 @@ export interface VolunteerDto {
 export interface CreateVolunteerDto {
   firstname: string;
   lastname: string;
-  citiesIds: string[];
-  activitiesIds: string[];
+  cityIds: string[];
+  activityIds: string[];
   social: CreateVolunteerSocialDto[];
   paymentOptions: CreateVolunteerPaymentOptionDto[];
   contacts: CreateVolunteerContactDto[];

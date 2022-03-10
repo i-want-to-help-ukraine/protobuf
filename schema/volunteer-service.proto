@@ -53,8 +53,8 @@ message VolunteerDto {
 message CreateVolunteerDto {
   string firstname = 1;
   string lastname = 2;
-  repeated string citiesIds = 3;
-  repeated string activitiesIds = 4;
+  repeated string cityIds = 3;
+  repeated string activityIds = 4;
   repeated CreateVolunteerSocialDto social = 5;
   repeated CreateVolunteerPaymentOptionDto paymentOptions = 6;
   repeated CreateVolunteerContactDto contacts = 7;
