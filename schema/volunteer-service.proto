@@ -8,17 +8,13 @@ package VolunteerServicePackage;
 service VolunteerServiceRPC {
   rpc search(SearchVolunteersDto) returns (VolunteersResponseDto) {}
 
-  rpc getCities(google.protobuf.Empty) returns (CitiesDto) {}
+  rpc getCities(GetByIdsDto) returns (CitiesDto) {}
 
-  rpc getActivities(google.protobuf.Empty) returns (ActivitiesDto) {}
+  rpc getActivities(GetByIdsDto) returns (ActivitiesDto) {}
 
-  rpc getSocialProviders(google.protobuf.Empty) returns (SocialProvidersDto) {}
+  rpc getSocialProviders(GetByIdsDto) returns (SocialProvidersDto) {}
 
-  rpc getPaymentProviders(google.protobuf.Empty) returns (PaymentProvidersDto) {}
-
-  rpc getVolunteerCities(VolunteerIdsRequestDto) returns (CitiesDto) {}
-
-  rpc getVolunteerActivities(VolunteerIdsRequestDto) returns (ActivitiesDto) {}
+  rpc getPaymentProviders(GetByIdsDto) returns (PaymentProvidersDto) {}
 
   rpc getVolunteerSocial(VolunteerIdsRequestDto) returns (VolunteerSocialResponseDto) {}
 
@@ -48,6 +44,8 @@ message VolunteerDto {
   string firstname = 2;
   string lastname = 3;
   string verificationStatus = 4;
+  repeated string cityIds = 5;
+  repeated string activityIds = 6;
 }
 
 message CreateVolunteerDto {

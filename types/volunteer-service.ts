@@ -3,7 +3,6 @@ import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { util, configure } from "protobufjs/minimal";
 import * as Long from "long";
 import { Observable } from "rxjs";
-import { Empty } from "./google/protobuf/empty";
 
 export const protobufPackage = "VolunteerServicePackage";
 
@@ -18,6 +17,8 @@ export interface VolunteerDto {
   firstname: string;
   lastname: string;
   verificationStatus: string;
+  cityIds: string[];
+  activityIds: string[];
 }
 
 export interface CreateVolunteerDto {
@@ -155,19 +156,13 @@ export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 export interface VolunteerServiceRPCClient {
   search(request: SearchVolunteersDto): Observable<VolunteersResponseDto>;
 
-  getCities(request: Empty): Observable<CitiesDto>;
+  getCities(request: GetByIdsDto): Observable<CitiesDto>;
 
-  getActivities(request: Empty): Observable<ActivitiesDto>;
+  getActivities(request: GetByIdsDto): Observable<ActivitiesDto>;
 
-  getSocialProviders(request: Empty): Observable<SocialProvidersDto>;
+  getSocialProviders(request: GetByIdsDto): Observable<SocialProvidersDto>;
 
-  getPaymentProviders(request: Empty): Observable<PaymentProvidersDto>;
-
-  getVolunteerCities(request: VolunteerIdsRequestDto): Observable<CitiesDto>;
-
-  getVolunteerActivities(
-    request: VolunteerIdsRequestDto
-  ): Observable<ActivitiesDto>;
+  getPaymentProviders(request: GetByIdsDto): Observable<PaymentProvidersDto>;
 
   getVolunteerSocial(
     request: VolunteerIdsRequestDto
@@ -209,34 +204,26 @@ export interface VolunteerServiceRPCController {
     | VolunteersResponseDto;
 
   getCities(
-    request: Empty
+    request: GetByIdsDto
   ): Promise<CitiesDto> | Observable<CitiesDto> | CitiesDto;
 
   getActivities(
-    request: Empty
+    request: GetByIdsDto
   ): Promise<ActivitiesDto> | Observable<ActivitiesDto> | ActivitiesDto;
 
   getSocialProviders(
-    request: Empty
+    request: GetByIdsDto
   ):
     | Promise<SocialProvidersDto>
     | Observable<SocialProvidersDto>
     | SocialProvidersDto;
 
   getPaymentProviders(
-    request: Empty
+    request: GetByIdsDto
   ):
     | Promise<PaymentProvidersDto>
     | Observable<PaymentProvidersDto>
     | PaymentProvidersDto;
-
-  getVolunteerCities(
-    request: VolunteerIdsRequestDto
-  ): Promise<CitiesDto> | Observable<CitiesDto> | CitiesDto;
-
-  getVolunteerActivities(
-    request: VolunteerIdsRequestDto
-  ): Promise<ActivitiesDto> | Observable<ActivitiesDto> | ActivitiesDto;
 
   getVolunteerSocial(
     request: VolunteerIdsRequestDto
@@ -303,8 +290,6 @@ export function VolunteerServiceRPCControllerMethods() {
       "getActivities",
       "getSocialProviders",
       "getPaymentProviders",
-      "getVolunteerCities",
-      "getVolunteerActivities",
       "getVolunteerSocial",
       "getVolunteerPaymentOptions",
       "getVolunteerContacts",
