@@ -115,6 +115,7 @@ export interface VolunteerSocialDto {
   id: string;
   url: string;
   volunteerId: string;
+  providerId: string;
 }
 
 export interface VolunteerSocialResponseDto {
@@ -126,6 +127,7 @@ export interface VolunteerPaymentOptionDto {
   id: string;
   metadata?: { [key: string]: any };
   volunteerId: string;
+  providerId: string;
 }
 
 export interface VolunteerPaymentOptionResponseDto {
@@ -143,6 +145,7 @@ export interface VolunteerContactDto {
   id: string;
   metadata?: { [key: string]: any };
   volunteerId: string;
+  providerId: string;
 }
 
 /** search */

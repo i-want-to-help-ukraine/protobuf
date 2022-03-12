@@ -142,6 +142,7 @@ message VolunteerSocialDto {
   string id = 1;
   string url = 2;
   string volunteerId = 4;
+  string providerId = 5;
 }
 
 message VolunteerSocialResponseDto {
@@ -153,6 +154,7 @@ message VolunteerPaymentOptionDto {
   string id = 1;
   google.protobuf.Struct metadata = 2;
   string volunteerId = 3;
+  string providerId = 5;
 }
 
 message VolunteerPaymentOptionResponseDto {
@@ -168,6 +170,7 @@ message VolunteerContactDto {
   string id = 1;
   google.protobuf.Struct metadata = 2;
   string volunteerId = 3;
+  string providerId = 5;
 }
 
 // search
