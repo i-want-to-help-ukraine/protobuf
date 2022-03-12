@@ -16,6 +16,8 @@ service VolunteerServiceRPC {
 
   rpc getPaymentProviders(GetByIdsDto) returns (PaymentProvidersDto) {}
 
+  rpc getContactProviders(GetByIdsDto) returns (ContactProvidersDto) {}
+
   rpc getVolunteerSocial(VolunteerIdsRequestDto) returns (VolunteerSocialResponseDto) {}
 
   rpc getVolunteerPaymentOptions(VolunteerIdsRequestDto) returns (VolunteerPaymentOptionResponseDto) {}
@@ -135,6 +137,10 @@ message SocialProvidersDto {
 message ContactProviderDto {
   string id = 1;
   string title = 2;
+}
+
+message ContactProvidersDto {
+  repeated ContactProviderDto contactProviders = 1;
 }
 
 // VolunteerSocial

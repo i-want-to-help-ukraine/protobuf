@@ -110,6 +110,10 @@ export interface ContactProviderDto {
   title: string;
 }
 
+export interface ContactProvidersDto {
+  contactProviders: ContactProviderDto[];
+}
+
 /** VolunteerSocial */
 export interface VolunteerSocialDto {
   id: string;
@@ -166,6 +170,8 @@ export interface VolunteerServiceRPCClient {
   getSocialProviders(request: GetByIdsDto): Observable<SocialProvidersDto>;
 
   getPaymentProviders(request: GetByIdsDto): Observable<PaymentProvidersDto>;
+
+  getContactProviders(request: GetByIdsDto): Observable<ContactProvidersDto>;
 
   getVolunteerSocial(
     request: VolunteerIdsRequestDto
@@ -227,6 +233,13 @@ export interface VolunteerServiceRPCController {
     | Promise<PaymentProvidersDto>
     | Observable<PaymentProvidersDto>
     | PaymentProvidersDto;
+
+  getContactProviders(
+    request: GetByIdsDto
+  ):
+    | Promise<ContactProvidersDto>
+    | Observable<ContactProvidersDto>
+    | ContactProvidersDto;
 
   getVolunteerSocial(
     request: VolunteerIdsRequestDto
@@ -293,6 +306,7 @@ export function VolunteerServiceRPCControllerMethods() {
       "getActivities",
       "getSocialProviders",
       "getPaymentProviders",
+      "getContactProviders",
       "getVolunteerSocial",
       "getVolunteerPaymentOptions",
       "getVolunteerContacts",
