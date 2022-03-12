@@ -11,6 +11,10 @@ export interface GetByIdsDto {
   ids: string[];
 }
 
+export interface GetByAuthId {
+  authId: string;
+}
+
 /** Volunteer */
 export interface VolunteerDto {
   id: string;
@@ -48,6 +52,10 @@ export interface CreateVolunteerContactDto {
 
 export interface VolunteersResponseDto {
   volunteers: VolunteerDto[];
+}
+
+export interface VolunteerAuthProfileDto {
+  volunteer?: VolunteerDto;
 }
 
 export interface ContactsResponseDto {
@@ -187,6 +195,10 @@ export interface VolunteerServiceRPCClient {
 
   getVolunteersByIds(request: GetByIdsDto): Observable<VolunteersResponseDto>;
 
+  getVolunteerAuthProfile(
+    request: GetByAuthId
+  ): Observable<VolunteerAuthProfileDto>;
+
   addPaymentOption(
     request: CreatePaymentOptionDto
   ): Observable<VolunteerResponseDto>;
@@ -269,6 +281,13 @@ export interface VolunteerServiceRPCController {
     | Observable<VolunteersResponseDto>
     | VolunteersResponseDto;
 
+  getVolunteerAuthProfile(
+    request: GetByAuthId
+  ):
+    | Promise<VolunteerAuthProfileDto>
+    | Observable<VolunteerAuthProfileDto>
+    | VolunteerAuthProfileDto;
+
   addPaymentOption(
     request: CreatePaymentOptionDto
   ):
@@ -311,6 +330,7 @@ export function VolunteerServiceRPCControllerMethods() {
       "getVolunteerPaymentOptions",
       "getVolunteerContacts",
       "getVolunteersByIds",
+      "getVolunteerAuthProfile",
       "addPaymentOption",
       "updatePaymentOption",
       "deletePaymentOption",

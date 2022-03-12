@@ -26,6 +26,8 @@ service VolunteerServiceRPC {
 
   rpc getVolunteersByIds(GetByIdsDto) returns (VolunteersResponseDto) {}
 
+  rpc getVolunteerAuthProfile(GetByAuthId) returns (VolunteerAuthProfileDto) {}
+
   rpc addPaymentOption(CreatePaymentOptionDto) returns (VolunteerResponseDto) {}
 
   rpc updatePaymentOption(UpdatePaymentOptionDto) returns (VolunteerResponseDto) {}
@@ -38,6 +40,10 @@ service VolunteerServiceRPC {
 // Shared
 message GetByIdsDto {
   repeated string ids = 1;
+}
+
+message GetByAuthId {
+  string authId = 1;
 }
 
 // Volunteer
@@ -77,6 +83,10 @@ message CreateVolunteerContactDto {
 
 message VolunteersResponseDto {
   repeated VolunteerDto volunteers = 1;
+}
+
+message VolunteerAuthProfileDto {
+  VolunteerDto volunteer = 1;
 }
 
 message ContactsResponseDto {
