@@ -37,12 +37,12 @@ export interface CreateVolunteerSocialDto {
 }
 
 export interface CreateVolunteerPaymentOptionDto {
-  metadata?: { [key: string]: any };
+  metadata: string;
   paymentOptionId: string;
 }
 
 export interface CreateVolunteerContactDto {
-  metadata?: { [key: string]: any };
+  metadata: string;
   contactProviderId: string;
 }
 
@@ -125,7 +125,7 @@ export interface VolunteerSocialResponseDto {
 /** VolunteerPaymentOption */
 export interface VolunteerPaymentOptionDto {
   id: string;
-  metadata?: { [key: string]: any };
+  metadata: string;
   volunteerId: string;
   providerId: string;
 }
@@ -143,7 +143,7 @@ export interface DeletePaymentOptionDto {}
 /** VolunteerContact */
 export interface VolunteerContactDto {
   id: string;
-  metadata?: { [key: string]: any };
+  metadata: string;
   volunteerId: string;
   providerId: string;
 }

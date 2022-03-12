@@ -64,12 +64,12 @@ message CreateVolunteerSocialDto {
 }
 
 message CreateVolunteerPaymentOptionDto {
-  google.protobuf.Struct metadata = 1;
+  string metadata = 1;
   string paymentOptionId = 2;
 }
 
 message CreateVolunteerContactDto {
-  google.protobuf.Struct metadata = 1;
+  string metadata = 1;
   string contactProviderId = 2;
 }
 
@@ -152,7 +152,7 @@ message VolunteerSocialResponseDto {
 // VolunteerPaymentOption
 message VolunteerPaymentOptionDto {
   string id = 1;
-  google.protobuf.Struct metadata = 2;
+  string metadata = 2;
   string volunteerId = 3;
   string providerId = 5;
 }
@@ -168,7 +168,7 @@ message DeletePaymentOptionDto {}
 // VolunteerContact
 message VolunteerContactDto {
   string id = 1;
-  google.protobuf.Struct metadata = 2;
+  string metadata = 2;
   string volunteerId = 3;
   string providerId = 5;
 }
