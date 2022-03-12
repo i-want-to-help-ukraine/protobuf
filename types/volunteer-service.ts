@@ -29,6 +29,7 @@ export interface VolunteerDto {
 }
 
 export interface CreateVolunteerDto {
+  authId: string;
   firstName: string;
   lastName: string;
   description: string;

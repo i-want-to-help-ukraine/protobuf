@@ -60,15 +60,16 @@ message VolunteerDto {
 }
 
 message CreateVolunteerDto {
-  string firstName = 1;
-  string lastName = 2;
-  string description = 3;
-  string organization = 4;
-  repeated string cityIds = 5;
-  repeated string activityIds = 6;
-  repeated CreateVolunteerSocialDto social = 7;
-  repeated CreateVolunteerPaymentOptionDto paymentOptions = 8;
-  repeated CreateVolunteerContactDto contacts = 9;
+  string authId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string description = 4;
+  string organization = 5;
+  repeated string cityIds = 6;
+  repeated string activityIds = 7;
+  repeated CreateVolunteerSocialDto social = 8;
+  repeated CreateVolunteerPaymentOptionDto paymentOptions = 9;
+  repeated CreateVolunteerContactDto contacts = 10;
 }
 
 message CreateVolunteerSocialDto {
