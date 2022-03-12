@@ -49,11 +49,14 @@ message GetByAuthId {
 // Volunteer
 message VolunteerDto {
   string id = 1;
-  string firstName = 2;
-  string lastName = 3;
-  string verificationStatus = 4;
-  repeated string cityIds = 5;
-  repeated string activityIds = 6;
+  string authId = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string description = 5;
+  string organization = 6;
+  string verificationStatus = 7;
+  repeated string cityIds = 8;
+  repeated string activityIds = 9;
 }
 
 message CreateVolunteerDto {

@@ -18,8 +18,11 @@ export interface GetByAuthId {
 /** Volunteer */
 export interface VolunteerDto {
   id: string;
+  authId: string;
   firstName: string;
   lastName: string;
+  description: string;
+  organization: string;
   verificationStatus: string;
   cityIds: string[];
   activityIds: string[];
