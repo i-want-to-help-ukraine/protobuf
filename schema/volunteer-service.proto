@@ -41,8 +41,8 @@ message GetByIdsDto {
 // Volunteer
 message VolunteerDto {
   string id = 1;
-  string firstname = 2;
-  string lastname = 3;
+  string firstName = 2;
+  string lastName = 3;
   string verificationStatus = 4;
   repeated string cityIds = 5;
   repeated string activityIds = 6;
