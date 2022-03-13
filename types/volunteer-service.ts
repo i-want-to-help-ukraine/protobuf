@@ -43,6 +43,7 @@ export interface CreateProfileDto {
 }
 
 export interface UpdateProfileDto {
+  id: string;
   firstName: string;
   lastName: string;
   description: string;
@@ -50,7 +51,7 @@ export interface UpdateProfileDto {
 }
 
 export interface HideProfileDto {
-  volunteerId: string;
+  id: string;
 }
 
 export interface CreateVolunteerSocialDto {

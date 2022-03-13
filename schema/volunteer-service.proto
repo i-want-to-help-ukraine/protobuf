@@ -71,14 +71,15 @@ message CreateProfileDto {
 }
 
 message UpdateProfileDto {
-  string firstName = 1;
-  string lastName = 2;
-  string description = 3;
-  string organization = 4;
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string description = 4;
+  string organization = 5;
 }
 
 message HideProfileDto {
-  string volunteerId = 1;
+  string id = 1;
 }
 
 message CreateVolunteerSocialDto {
