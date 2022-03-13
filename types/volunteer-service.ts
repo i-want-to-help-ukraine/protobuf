@@ -3,6 +3,7 @@ import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { util, configure } from "protobufjs/minimal";
 import * as Long from "long";
 import { Observable } from "rxjs";
+import { Empty } from "./google/protobuf/empty";
 
 export const protobufPackage = "VolunteerServicePackage";
 
@@ -28,7 +29,7 @@ export interface VolunteerDto {
   activityIds: string[];
 }
 
-export interface CreateVolunteerDto {
+export interface CreateProfileDto {
   authId: string;
   firstName: string;
   lastName: string;
@@ -39,6 +40,17 @@ export interface CreateVolunteerDto {
   social: CreateVolunteerSocialDto[];
   paymentOptions: CreateVolunteerPaymentOptionDto[];
   contacts: CreateVolunteerContactDto[];
+}
+
+export interface UpdateProfileDto {
+  firstName: string;
+  lastName: string;
+  description: string;
+  organization: string;
+}
+
+export interface HideProfileDto {
+  volunteerId: string;
 }
 
 export interface CreateVolunteerSocialDto {
@@ -205,21 +217,11 @@ export interface VolunteerServiceRPCClient {
     request: GetByAuthId
   ): Observable<VolunteerAuthProfileDto>;
 
-  addPaymentOption(
-    request: CreatePaymentOptionDto
-  ): Observable<VolunteerResponseDto>;
+  createProfile(request: CreateProfileDto): Observable<VolunteerResponseDto>;
 
-  updatePaymentOption(
-    request: UpdatePaymentOptionDto
-  ): Observable<VolunteerResponseDto>;
+  updateProfile(request: UpdateProfileDto): Observable<VolunteerResponseDto>;
 
-  deletePaymentOption(
-    request: DeletePaymentOptionDto
-  ): Observable<VolunteerResponseDto>;
-
-  createVolunteer(
-    request: CreateVolunteerDto
-  ): Observable<VolunteerResponseDto>;
+  hideProfile(request: HideProfileDto): Observable<Empty>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -294,33 +296,21 @@ export interface VolunteerServiceRPCController {
     | Observable<VolunteerAuthProfileDto>
     | VolunteerAuthProfileDto;
 
-  addPaymentOption(
-    request: CreatePaymentOptionDto
+  createProfile(
+    request: CreateProfileDto
   ):
     | Promise<VolunteerResponseDto>
     | Observable<VolunteerResponseDto>
     | VolunteerResponseDto;
 
-  updatePaymentOption(
-    request: UpdatePaymentOptionDto
+  updateProfile(
+    request: UpdateProfileDto
   ):
     | Promise<VolunteerResponseDto>
     | Observable<VolunteerResponseDto>
     | VolunteerResponseDto;
 
-  deletePaymentOption(
-    request: DeletePaymentOptionDto
-  ):
-    | Promise<VolunteerResponseDto>
-    | Observable<VolunteerResponseDto>
-    | VolunteerResponseDto;
-
-  createVolunteer(
-    request: CreateVolunteerDto
-  ):
-    | Promise<VolunteerResponseDto>
-    | Observable<VolunteerResponseDto>
-    | VolunteerResponseDto;
+  hideProfile(request: HideProfileDto): void;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
@@ -337,10 +327,9 @@ export function VolunteerServiceRPCControllerMethods() {
       "getVolunteerContacts",
       "getVolunteersByIds",
       "getVolunteerAuthProfile",
-      "addPaymentOption",
-      "updatePaymentOption",
-      "deletePaymentOption",
-      "createVolunteer",
+      "createProfile",
+      "updateProfile",
+      "hideProfile",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(

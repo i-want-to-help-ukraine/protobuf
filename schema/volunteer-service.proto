@@ -28,13 +28,11 @@ service VolunteerServiceRPC {
 
   rpc getVolunteerAuthProfile(GetByAuthId) returns (VolunteerAuthProfileDto) {}
 
-  rpc addPaymentOption(CreatePaymentOptionDto) returns (VolunteerResponseDto) {}
+  rpc createProfile(CreateProfileDto) returns (VolunteerResponseDto) {}
 
-  rpc updatePaymentOption(UpdatePaymentOptionDto) returns (VolunteerResponseDto) {}
+  rpc updateProfile(UpdateProfileDto) returns (VolunteerResponseDto) {}
 
-  rpc deletePaymentOption(DeletePaymentOptionDto) returns (VolunteerResponseDto) {}
-
-  rpc createVolunteer(CreateVolunteerDto) returns (VolunteerResponseDto) {}
+  rpc hideProfile(HideProfileDto) returns (google.protobuf.Empty) {}
 }
 
 // Shared
@@ -59,7 +57,7 @@ message VolunteerDto {
   repeated string activityIds = 9;
 }
 
-message CreateVolunteerDto {
+message CreateProfileDto {
   string authId = 1;
   string firstName = 2;
   string lastName = 3;
@@ -70,6 +68,17 @@ message CreateVolunteerDto {
   repeated CreateVolunteerSocialDto social = 8;
   repeated CreateVolunteerPaymentOptionDto paymentOptions = 9;
   repeated CreateVolunteerContactDto contacts = 10;
+}
+
+message UpdateProfileDto {
+  string firstName = 1;
+  string lastName = 2;
+  string description = 3;
+  string organization = 4;
+}
+
+message HideProfileDto {
+  string volunteerId = 1;
 }
 
 message CreateVolunteerSocialDto {
