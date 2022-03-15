@@ -78,14 +78,14 @@ message UpdateProfileDto {
   optional string organization = 5;
   repeated string cityIds = 6;
   repeated string activityIds = 7;
-  UpdateOrCreateVolunteerSocialDto social = 8;
-  UpdateOrCreateVolunteerPaymentOptionDto paymentOptions = 9;
-  UpdateOrCreateVolunteerContactDto contacts = 10;
+  CreateOrDeleteVolunteerSocialDto social = 8;
+  CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 9;
+  CreateOrDeleteVolunteerContactDto contacts = 10;
 }
 
-message UpdateOrCreateVolunteerSocialDto {
+message CreateOrDeleteVolunteerSocialDto {
   repeated CreateVolunteerSocialDto create = 1;
-  repeated UpdateVolunteerSocialDto update = 2;
+  repeated string delete = 2;
 }
 
 message CreateVolunteerSocialDto {
@@ -93,14 +93,9 @@ message CreateVolunteerSocialDto {
   string socialProviderId = 2;
 }
 
-message UpdateVolunteerSocialDto {
-  string id = 1;
-  string url = 2;
-}
-
-message UpdateOrCreateVolunteerPaymentOptionDto {
+message CreateOrDeleteVolunteerPaymentOptionDto {
   repeated CreateVolunteerPaymentOptionDto create = 1;
-  repeated UpdateVolunteerPaymentOptionDto update = 2;
+  repeated string delete = 2;
 }
 
 message CreateVolunteerPaymentOptionDto {
@@ -108,24 +103,14 @@ message CreateVolunteerPaymentOptionDto {
   string paymentProviderId = 2;
 }
 
-message UpdateVolunteerPaymentOptionDto {
-  string id = 1;
-  string metadata = 2;
-}
-
-message UpdateOrCreateVolunteerContactDto {
+message CreateOrDeleteVolunteerContactDto {
   repeated CreateVolunteerContactDto create = 1;
-  repeated UpdateVolunteerContactDto update = 2;
+  repeated string delete = 2;
 }
 
 message CreateVolunteerContactDto {
   string metadata = 1;
   string contactProviderId = 2;
-}
-
-message UpdateVolunteerContactDto {
-  string id = 1;
-  string metadata = 2;
 }
 
 message HideProfileDto {

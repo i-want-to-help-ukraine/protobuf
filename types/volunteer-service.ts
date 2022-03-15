@@ -49,14 +49,14 @@ export interface UpdateProfileDto {
   organization?: string | undefined;
   cityIds: string[];
   activityIds: string[];
-  social?: UpdateOrCreateVolunteerSocialDto;
-  paymentOptions?: UpdateOrCreateVolunteerPaymentOptionDto;
-  contacts?: UpdateOrCreateVolunteerContactDto;
+  social?: CreateOrDeleteVolunteerSocialDto;
+  paymentOptions?: CreateOrDeleteVolunteerPaymentOptionDto;
+  contacts?: CreateOrDeleteVolunteerContactDto;
 }
 
-export interface UpdateOrCreateVolunteerSocialDto {
+export interface CreateOrDeleteVolunteerSocialDto {
   create: CreateVolunteerSocialDto[];
-  update: UpdateVolunteerSocialDto[];
+  delete: string[];
 }
 
 export interface CreateVolunteerSocialDto {
@@ -64,14 +64,9 @@ export interface CreateVolunteerSocialDto {
   socialProviderId: string;
 }
 
-export interface UpdateVolunteerSocialDto {
-  id: string;
-  url: string;
-}
-
-export interface UpdateOrCreateVolunteerPaymentOptionDto {
+export interface CreateOrDeleteVolunteerPaymentOptionDto {
   create: CreateVolunteerPaymentOptionDto[];
-  update: UpdateVolunteerPaymentOptionDto[];
+  delete: string[];
 }
 
 export interface CreateVolunteerPaymentOptionDto {
@@ -79,24 +74,14 @@ export interface CreateVolunteerPaymentOptionDto {
   paymentProviderId: string;
 }
 
-export interface UpdateVolunteerPaymentOptionDto {
-  id: string;
-  metadata: string;
-}
-
-export interface UpdateOrCreateVolunteerContactDto {
+export interface CreateOrDeleteVolunteerContactDto {
   create: CreateVolunteerContactDto[];
-  update: UpdateVolunteerContactDto[];
+  delete: string[];
 }
 
 export interface CreateVolunteerContactDto {
   metadata: string;
   contactProviderId: string;
-}
-
-export interface UpdateVolunteerContactDto {
-  id: string;
-  metadata: string;
 }
 
 export interface HideProfileDto {
