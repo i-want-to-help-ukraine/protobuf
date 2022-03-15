@@ -76,7 +76,7 @@ export interface UpdateOrCreateVolunteerPaymentOptionDto {
 
 export interface CreateVolunteerPaymentOptionDto {
   metadata: string;
-  paymentOptionId: string;
+  paymentProviderId: string;
 }
 
 export interface UpdateVolunteerPaymentOptionDto {
