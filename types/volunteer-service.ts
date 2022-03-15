@@ -3,7 +3,6 @@ import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { util, configure } from "protobufjs/minimal";
 import * as Long from "long";
 import { Observable } from "rxjs";
-import { Empty } from "./google/protobuf/empty";
 
 export const protobufPackage = "VolunteerServicePackage";
 
@@ -251,7 +250,7 @@ export interface VolunteerServiceRPCClient {
 
   updateProfile(request: UpdateProfileDto): Observable<VolunteerResponseDto>;
 
-  hideProfile(request: HideProfileDto): Observable<Empty>;
+  hideProfile(request: HideProfileDto): Observable<VolunteerResponseDto>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -340,7 +339,12 @@ export interface VolunteerServiceRPCController {
     | Observable<VolunteerResponseDto>
     | VolunteerResponseDto;
 
-  hideProfile(request: HideProfileDto): void;
+  hideProfile(
+    request: HideProfileDto
+  ):
+    | Promise<VolunteerResponseDto>
+    | Observable<VolunteerResponseDto>
+    | VolunteerResponseDto;
 }
 
 export function VolunteerServiceRPCControllerMethods() {

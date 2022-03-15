@@ -32,7 +32,7 @@ service VolunteerServiceRPC {
 
   rpc updateProfile(UpdateProfileDto) returns (VolunteerResponseDto) {}
 
-  rpc hideProfile(HideProfileDto) returns (google.protobuf.Empty) {}
+  rpc hideProfile(HideProfileDto) returns (VolunteerResponseDto) {}
 }
 
 // Shared
