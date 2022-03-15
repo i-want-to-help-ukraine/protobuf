@@ -43,10 +43,10 @@ export interface CreateProfileDto {
 
 export interface UpdateProfileDto {
   id: string;
-  firstName: string;
-  lastName: string;
-  description: string;
-  organization: string;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  description?: string | undefined;
+  organization?: string | undefined;
   cityIds: string[];
   activityIds: string[];
   social?: UpdateOrCreateVolunteerSocialDto;

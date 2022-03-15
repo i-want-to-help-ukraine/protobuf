@@ -72,10 +72,10 @@ message CreateProfileDto {
 
 message UpdateProfileDto {
   string id = 1;
-  string firstName = 2;
-  string lastName = 3;
-  string description = 4;
-  string organization = 5;
+  optional string firstName = 2;
+  optional string lastName = 3;
+  optional string description = 4;
+  optional string organization = 5;
   repeated string cityIds = 6;
   repeated string activityIds = 7;
   UpdateOrCreateVolunteerSocialDto social = 8;
