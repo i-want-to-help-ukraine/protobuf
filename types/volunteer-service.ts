@@ -196,6 +196,8 @@ export interface VolunteerContactDto {
 export interface SearchVolunteersDto {
   cityIds: string[];
   activityIds: string[];
+  startCursor: string;
+  offset: number;
 }
 
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
