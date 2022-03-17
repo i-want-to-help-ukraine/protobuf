@@ -225,6 +225,6 @@ message VolunteerContactDto {
 message SearchVolunteersDto {
   repeated string cityIds = 1;
   repeated string activityIds = 2;
-  string startCursor = 3;
   int32 offset = 4;
+  optional string startCursor = 3;
 }
