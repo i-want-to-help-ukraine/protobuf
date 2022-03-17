@@ -42,7 +42,7 @@ export interface CreateProfileDto {
 }
 
 export interface UpdateProfileDto {
-  id: string;
+  authId: string;
   firstName?: string | undefined;
   lastName?: string | undefined;
   description?: string | undefined;
