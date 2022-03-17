@@ -200,6 +200,14 @@ export interface SearchVolunteersDto {
   startCursor?: string | undefined;
 }
 
+export interface SearchVolunteerResponse {
+  totalCount: number;
+  startCursor: string;
+  endCursor: string;
+  hasNextPage: boolean;
+  volunteers: VolunteerDto[];
+}
+
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 
 export interface VolunteerServiceRPCClient {

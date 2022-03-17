@@ -228,3 +228,11 @@ message SearchVolunteersDto {
   int32 offset = 4;
   optional string startCursor = 3;
 }
+
+message SearchVolunteerResponse {
+  int32 totalCount = 1;
+  string startCursor = 2;
+  string endCursor = 3;
+  bool hasNextPage = 4;
+  repeated VolunteerDto volunteers = 5;
+}
