@@ -6,7 +6,7 @@ import "google/protobuf/empty.proto";
 package VolunteerServicePackage;
 
 service VolunteerServiceRPC {
-  rpc search(SearchVolunteersDto) returns (VolunteersResponseDto) {}
+  rpc search(SearchVolunteersDto) returns (SearchVolunteerResponse) {}
 
   rpc getCities(GetByIdsDto) returns (CitiesDto) {}
 

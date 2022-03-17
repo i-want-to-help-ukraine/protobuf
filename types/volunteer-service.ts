@@ -211,7 +211,7 @@ export interface SearchVolunteerResponse {
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 
 export interface VolunteerServiceRPCClient {
-  search(request: SearchVolunteersDto): Observable<VolunteersResponseDto>;
+  search(request: SearchVolunteersDto): Observable<SearchVolunteerResponse>;
 
   getCities(request: GetByIdsDto): Observable<CitiesDto>;
 
@@ -252,9 +252,9 @@ export interface VolunteerServiceRPCController {
   search(
     request: SearchVolunteersDto
   ):
-    | Promise<VolunteersResponseDto>
-    | Observable<VolunteersResponseDto>
-    | VolunteersResponseDto;
+    | Promise<SearchVolunteerResponse>
+    | Observable<SearchVolunteerResponse>
+    | SearchVolunteerResponse;
 
   getCities(
     request: GetByIdsDto
