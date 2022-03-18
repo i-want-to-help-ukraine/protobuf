@@ -50,11 +50,12 @@ message VolunteerDto {
   string authId = 2;
   string firstName = 3;
   string lastName = 4;
-  string description = 5;
-  string organization = 6;
-  string verificationStatus = 7;
-  repeated string cityIds = 8;
-  repeated string activityIds = 9;
+  string avatarUrl = 5;
+  string description = 6;
+  string organization = 7;
+  string verificationStatus = 8;
+  repeated string cityIds = 9;
+  repeated string activityIds = 10;
 }
 
 message CreateProfileDto {
@@ -62,25 +63,25 @@ message CreateProfileDto {
   string firstName = 2;
   string lastName = 3;
   string description = 4;
-  string organization = 5;
-  repeated string cityIds = 6;
-  repeated string activityIds = 7;
-  repeated CreateVolunteerSocialDto social = 8;
-  repeated CreateVolunteerPaymentOptionDto paymentOptions = 9;
-  repeated CreateVolunteerContactDto contacts = 10;
+  string avatarUrl = 5;
+  string organization = 6;
+  repeated string cityIds = 7;
+  repeated string activityIds = 8;
+  repeated CreateVolunteerSocialDto social = 9;
+  repeated CreateVolunteerPaymentOptionDto paymentOptions = 10;
+  repeated CreateVolunteerContactDto contacts = 11;
 }
 
 message UpdateProfileDto {
-  string authId = 1;
-  optional string firstName = 2;
-  optional string lastName = 3;
-  optional string description = 4;
-  optional string organization = 5;
-  repeated string cityIds = 6;
-  repeated string activityIds = 7;
-  CreateOrDeleteVolunteerSocialDto social = 8;
-  CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 9;
-  CreateOrDeleteVolunteerContactDto contacts = 10;
+  optional string firstName = 1;
+  optional string lastName = 2;
+  optional string description = 3;
+  optional string organization = 4;
+  repeated string cityIds = 5;
+  repeated string activityIds = 6;
+  CreateOrDeleteVolunteerSocialDto social = 7;
+  CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 8;
+  CreateOrDeleteVolunteerContactDto contacts = 9;
 }
 
 message CreateOrDeleteVolunteerSocialDto {

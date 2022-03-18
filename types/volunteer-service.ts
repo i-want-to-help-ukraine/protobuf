@@ -21,6 +21,7 @@ export interface VolunteerDto {
   authId: string;
   firstName: string;
   lastName: string;
+  avatarUrl: string;
   description: string;
   organization: string;
   verificationStatus: string;
@@ -33,6 +34,7 @@ export interface CreateProfileDto {
   firstName: string;
   lastName: string;
   description: string;
+  avatarUrl: string;
   organization: string;
   cityIds: string[];
   activityIds: string[];
@@ -42,7 +44,6 @@ export interface CreateProfileDto {
 }
 
 export interface UpdateProfileDto {
-  authId: string;
   firstName?: string | undefined;
   lastName?: string | undefined;
   description?: string | undefined;
