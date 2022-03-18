@@ -73,15 +73,16 @@ message CreateProfileDto {
 }
 
 message UpdateProfileDto {
-  optional string firstName = 1;
-  optional string lastName = 2;
-  optional string description = 3;
-  optional string organization = 4;
-  repeated string cityIds = 5;
-  repeated string activityIds = 6;
-  CreateOrDeleteVolunteerSocialDto social = 7;
-  CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 8;
-  CreateOrDeleteVolunteerContactDto contacts = 9;
+  string authId = 1;
+  optional string firstName = 2;
+  optional string lastName = 3;
+  optional string description = 4;
+  optional string organization = 5;
+  repeated string cityIds = 6;
+  repeated string activityIds = 7;
+  CreateOrDeleteVolunteerSocialDto social = 8;
+  CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 9;
+  CreateOrDeleteVolunteerContactDto contacts = 10;
 }
 
 message CreateOrDeleteVolunteerSocialDto {

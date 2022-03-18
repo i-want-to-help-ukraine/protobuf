@@ -44,6 +44,7 @@ export interface CreateProfileDto {
 }
 
 export interface UpdateProfileDto {
+  authId: string;
   firstName?: string | undefined;
   lastName?: string | undefined;
   description?: string | undefined;
