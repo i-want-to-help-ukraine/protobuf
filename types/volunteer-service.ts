@@ -114,6 +114,7 @@ export interface VolunteerIdsRequestDto {
 export interface ActivityDto {
   id: string;
   title: string;
+  description: string;
   volunteers?: VolunteerDto;
 }
 
