@@ -48,6 +48,7 @@ export interface UpdateProfileDto {
   firstName?: string | undefined;
   lastName?: string | undefined;
   description?: string | undefined;
+  avatarUrl?: string | undefined;
   organization?: string | undefined;
   cityIds: string[];
   activityIds: string[];

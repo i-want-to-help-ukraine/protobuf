@@ -77,12 +77,13 @@ message UpdateProfileDto {
   optional string firstName = 2;
   optional string lastName = 3;
   optional string description = 4;
-  optional string organization = 5;
-  repeated string cityIds = 6;
-  repeated string activityIds = 7;
-  CreateOrDeleteVolunteerSocialDto social = 8;
-  CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 9;
-  CreateOrDeleteVolunteerContactDto contacts = 10;
+  optional string avatarUrl = 5;
+  optional string organization = 6;
+  repeated string cityIds = 7;
+  repeated string activityIds = 8;
+  CreateOrDeleteVolunteerSocialDto social = 9;
+  CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 10;
+  CreateOrDeleteVolunteerContactDto contacts = 11;
 }
 
 message CreateOrDeleteVolunteerSocialDto {
