@@ -154,7 +154,8 @@ message ActivitiesDto {
 message CityDto {
   string id = 1;
   string title = 2;
-  VolunteerDto volunteers = 3;
+  string description = 3;
+  VolunteerDto volunteers = 4;
 }
 
 message CitiesDto {

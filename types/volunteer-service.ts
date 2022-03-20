@@ -125,6 +125,7 @@ export interface ActivitiesDto {
 export interface CityDto {
   id: string;
   title: string;
+  description: string;
   volunteers?: VolunteerDto;
 }
 
