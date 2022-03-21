@@ -208,7 +208,7 @@ export interface SearchVolunteersDto {
 export interface SearchVolunteerResponse {
   totalCount: number;
   startCursor?: string | undefined;
-  endCursor: string;
+  endCursor?: string | undefined;
   hasNextPage: boolean;
   volunteers: VolunteerDto[];
 }

@@ -237,7 +237,7 @@ message SearchVolunteersDto {
 message SearchVolunteerResponse {
   int32 totalCount = 1;
   optional string startCursor = 2;
-  string endCursor = 3;
+  optional string endCursor = 3;
   bool hasNextPage = 4;
   repeated VolunteerDto volunteers = 5;
 }
