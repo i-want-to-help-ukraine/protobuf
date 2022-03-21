@@ -88,7 +88,7 @@ export interface CreateVolunteerContactDto {
 }
 
 export interface HideProfileDto {
-  id: string;
+  authId: string;
 }
 
 export interface VolunteersResponseDto {

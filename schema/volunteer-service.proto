@@ -117,7 +117,7 @@ message CreateVolunteerContactDto {
 }
 
 message HideProfileDto {
-  string id = 1;
+  string authId = 1;
 }
 
 message VolunteersResponseDto {
