@@ -33,7 +33,7 @@ export interface CreateProfileDto {
   authId: string;
   firstName: string;
   lastName: string;
-  description: string;
+  description?: string | undefined;
   avatarUrl: string;
   organization: string;
   cityIds: string[];

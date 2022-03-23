@@ -62,7 +62,7 @@ message CreateProfileDto {
   string authId = 1;
   string firstName = 2;
   string lastName = 3;
-  string description = 4;
+  optional string description = 4;
   string avatarUrl = 5;
   string organization = 6;
   repeated string cityIds = 7;
