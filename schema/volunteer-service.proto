@@ -51,7 +51,7 @@ message VolunteerDto {
   string firstName = 3;
   string lastName = 4;
   string avatarUrl = 5;
-  string description = 6;
+  optional string description = 6;
   optional string organization = 7;
   string verificationStatus = 8;
   repeated string cityIds = 9;

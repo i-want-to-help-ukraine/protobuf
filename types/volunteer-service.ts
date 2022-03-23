@@ -22,7 +22,7 @@ export interface VolunteerDto {
   firstName: string;
   lastName: string;
   avatarUrl: string;
-  description: string;
+  description?: string | undefined;
   organization?: string | undefined;
   verificationStatus: string;
   cityIds: string[];
