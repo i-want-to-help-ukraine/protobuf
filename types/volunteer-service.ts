@@ -23,7 +23,7 @@ export interface VolunteerDto {
   lastName: string;
   avatarUrl: string;
   description: string;
-  organization: string;
+  organization?: string | undefined;
   verificationStatus: string;
   cityIds: string[];
   activityIds: string[];
@@ -35,7 +35,7 @@ export interface CreateProfileDto {
   lastName: string;
   description?: string | undefined;
   avatarUrl: string;
-  organization: string;
+  organization?: string | undefined;
   cityIds: string[];
   activityIds: string[];
   social: CreateVolunteerSocialDto[];

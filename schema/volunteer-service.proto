@@ -52,7 +52,7 @@ message VolunteerDto {
   string lastName = 4;
   string avatarUrl = 5;
   string description = 6;
-  string organization = 7;
+  optional string organization = 7;
   string verificationStatus = 8;
   repeated string cityIds = 9;
   repeated string activityIds = 10;
@@ -64,7 +64,7 @@ message CreateProfileDto {
   string lastName = 3;
   optional string description = 4;
   string avatarUrl = 5;
-  string organization = 6;
+  optional string organization = 6;
   repeated string cityIds = 7;
   repeated string activityIds = 8;
   repeated CreateVolunteerSocialDto social = 9;
