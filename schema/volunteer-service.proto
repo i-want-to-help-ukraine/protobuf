@@ -56,6 +56,7 @@ message VolunteerDto {
   string verificationStatus = 8;
   repeated string cityIds = 9;
   repeated string activityIds = 10;
+  optional string authEmail = 11;
 }
 
 message CreateProfileDto {
@@ -70,6 +71,7 @@ message CreateProfileDto {
   repeated CreateVolunteerSocialDto social = 9;
   repeated CreateVolunteerPaymentOptionDto paymentOptions = 10;
   repeated CreateVolunteerContactDto contacts = 11;
+  optional string authEmail = 12;
 }
 
 message UpdateProfileDto {

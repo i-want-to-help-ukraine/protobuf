@@ -27,6 +27,7 @@ export interface VolunteerDto {
   verificationStatus: string;
   cityIds: string[];
   activityIds: string[];
+  authEmail?: string | undefined;
 }
 
 export interface CreateProfileDto {
@@ -41,6 +42,7 @@ export interface CreateProfileDto {
   social: CreateVolunteerSocialDto[];
   paymentOptions: CreateVolunteerPaymentOptionDto[];
   contacts: CreateVolunteerContactDto[];
+  authEmail?: string | undefined;
 }
 
 export interface UpdateProfileDto {
