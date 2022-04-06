@@ -197,6 +197,7 @@ export interface VolunteerContactDto {
   metadata: string;
   volunteerId: string;
   providerId: string;
+  isAllowedToDisplay: boolean;
 }
 
 /** search */
