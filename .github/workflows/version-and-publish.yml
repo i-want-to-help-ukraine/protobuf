@@ -20,7 +20,8 @@ jobs:
           ref: ${{ github.ref }}
       - name: cat package.json
         run: cat ./package.json
-      - name: Automated Version Bump
+
+      - name: Version Bump
         id: version-bump
         uses: phips28/gh-action-bump-version@master
         with:
@@ -29,12 +30,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
       - name: cat package.json
         run: cat ./package.json
-      - name: npm install
-        run: npm install
-      - name: npm publish
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+
+      - name: Publish
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+          scope: '@i-want-to-help-ukraine'
+        - run: npm install
+        - run: npm publish
+          env:
+            NODE_AUTH_TOKEN: ${{secrets.PACKAGES_TOKEN}}
+
       - name: Output Step
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
