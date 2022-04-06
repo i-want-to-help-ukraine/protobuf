@@ -116,6 +116,7 @@ message CreateOrDeleteVolunteerContactDto {
 message CreateVolunteerContactDto {
   string metadata = 1;
   string contactProviderId = 2;
+  string isAllowedToDisplay = 3;
 }
 
 message HideProfileDto {
