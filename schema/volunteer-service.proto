@@ -226,6 +226,7 @@ message VolunteerContactDto {
   string metadata = 2;
   string volunteerId = 3;
   string providerId = 5;
+  bool isAllowedToDisplay = 6;
 }
 
 // search
