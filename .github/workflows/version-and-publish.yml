@@ -1,4 +1,4 @@
-name: 'Bump Version'
+name: 'Bump version and publish'
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   bump-version:
-    name: Bump Version
+    name: Bump version and publish
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +29,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
       - name: cat package.json
         run: cat ./package.json
+      - name: npm install
+        run: npm install
+      - name: npm publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
       - name: Output Step
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
