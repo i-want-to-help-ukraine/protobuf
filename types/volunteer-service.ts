@@ -87,7 +87,7 @@ export interface CreateOrDeleteVolunteerContactDto {
 export interface CreateVolunteerContactDto {
   metadata: string;
   contactProviderId: string;
-  isAllowedToDisplay: string;
+  isAllowedToDisplay: boolean;
 }
 
 export interface HideProfileDto {
