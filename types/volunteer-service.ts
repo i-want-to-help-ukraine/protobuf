@@ -215,6 +215,25 @@ export interface SearchVolunteerResponse {
   volunteers: VolunteerDto[];
 }
 
+/** Change volunteer status */
+export interface ChangeVolunteerStatusRequestDto {
+  volunteerId: string;
+}
+
+/** Patch volunteer */
+export interface PatchVolunteerRequestDto {
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  description?: string | undefined;
+  avatarUrl?: string | undefined;
+  organization?: string | undefined;
+  cityIds: string[];
+  activityIds: string[];
+  social?: CreateOrDeleteVolunteerSocialDto;
+  paymentOptions?: CreateOrDeleteVolunteerPaymentOptionDto;
+  contacts?: CreateOrDeleteVolunteerContactDto;
+}
+
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 
 export interface VolunteerServiceRPCClient {
@@ -253,6 +272,14 @@ export interface VolunteerServiceRPCClient {
   updateProfile(request: UpdateProfileDto): Observable<VolunteerResponseDto>;
 
   hideProfile(request: HideProfileDto): Observable<VolunteerResponseDto>;
+
+  changeVolunteerStatus(
+    request: ChangeVolunteerStatusRequestDto
+  ): Observable<VolunteerResponseDto>;
+
+  patchVolunteer(
+    request: PatchVolunteerRequestDto
+  ): Observable<VolunteerResponseDto>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -347,6 +374,20 @@ export interface VolunteerServiceRPCController {
     | Promise<VolunteerResponseDto>
     | Observable<VolunteerResponseDto>
     | VolunteerResponseDto;
+
+  changeVolunteerStatus(
+    request: ChangeVolunteerStatusRequestDto
+  ):
+    | Promise<VolunteerResponseDto>
+    | Observable<VolunteerResponseDto>
+    | VolunteerResponseDto;
+
+  patchVolunteer(
+    request: PatchVolunteerRequestDto
+  ):
+    | Promise<VolunteerResponseDto>
+    | Observable<VolunteerResponseDto>
+    | VolunteerResponseDto;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
@@ -366,6 +407,8 @@ export function VolunteerServiceRPCControllerMethods() {
       "createProfile",
       "updateProfile",
       "hideProfile",
+      "changeVolunteerStatus",
+      "patchVolunteer",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(
