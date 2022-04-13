@@ -218,6 +218,7 @@ export interface SearchVolunteerResponse {
 /** Change volunteer status */
 export interface ChangeVolunteerStatusRequestDto {
   volunteerId: string;
+  status: string;
 }
 
 /** Patch volunteer */

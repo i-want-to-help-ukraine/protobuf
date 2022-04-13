@@ -251,6 +251,7 @@ message SearchVolunteerResponse {
 // Change volunteer status
 message ChangeVolunteerStatusRequestDto {
   string volunteerId = 1;
+  string status = 2;
 }
 
 // Patch volunteer
