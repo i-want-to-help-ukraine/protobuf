@@ -87,7 +87,6 @@ export interface CreateOrDeleteVolunteerContactDto {
 export interface CreateVolunteerContactDto {
   metadata: string;
   contactProviderId: string;
-  isAllowedToDisplay: boolean;
 }
 
 export interface HideProfileDto {
@@ -198,7 +197,6 @@ export interface VolunteerContactDto {
   metadata: string;
   volunteerId: string;
   providerId: string;
-  isAllowedToDisplay: boolean;
 }
 
 /** search */
