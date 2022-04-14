@@ -223,6 +223,7 @@ export interface ChangeVolunteerStatusRequestDto {
 
 /** Patch volunteer */
 export interface PatchVolunteerRequestDto {
+  volunteerId: string;
   firstName?: string | undefined;
   lastName?: string | undefined;
   description?: string | undefined;
