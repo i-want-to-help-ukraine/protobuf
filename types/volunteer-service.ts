@@ -3,6 +3,7 @@ import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { util, configure } from "protobufjs/minimal";
 import * as Long from "long";
 import { Observable } from "rxjs";
+import { Empty } from "./google/protobuf/empty";
 
 export const protobufPackage = "VolunteerServicePackage";
 
@@ -241,10 +242,6 @@ export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 export interface VolunteerServiceRPCClient {
   search(request: SearchVolunteersDto): Observable<SearchVolunteerResponse>;
 
-  searchRequestedVolunteers(
-    request: SearchVolunteersDto
-  ): Observable<SearchVolunteerResponse>;
-
   getCities(request: GetByIdsDto): Observable<CitiesDto>;
 
   getActivities(request: GetByIdsDto): Observable<ActivitiesDto>;
@@ -286,17 +283,12 @@ export interface VolunteerServiceRPCClient {
   patchVolunteer(
     request: PatchVolunteerRequestDto
   ): Observable<VolunteerResponseDto>;
+
+  getRequestedVolunteers(request: Empty): Observable<VolunteersResponseDto>;
 }
 
 export interface VolunteerServiceRPCController {
   search(
-    request: SearchVolunteersDto
-  ):
-    | Promise<SearchVolunteerResponse>
-    | Observable<SearchVolunteerResponse>
-    | SearchVolunteerResponse;
-
-  searchRequestedVolunteers(
     request: SearchVolunteersDto
   ):
     | Promise<SearchVolunteerResponse>
@@ -401,13 +393,19 @@ export interface VolunteerServiceRPCController {
     | Promise<VolunteerResponseDto>
     | Observable<VolunteerResponseDto>
     | VolunteerResponseDto;
+
+  getRequestedVolunteers(
+    request: Empty
+  ):
+    | Promise<VolunteersResponseDto>
+    | Observable<VolunteersResponseDto>
+    | VolunteersResponseDto;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
   return function (constructor: Function) {
     const grpcMethods: string[] = [
       "search",
-      "searchRequestedVolunteers",
       "getCities",
       "getActivities",
       "getSocialProviders",
@@ -423,6 +421,7 @@ export function VolunteerServiceRPCControllerMethods() {
       "hideProfile",
       "changeVolunteerStatus",
       "patchVolunteer",
+      "getRequestedVolunteers",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(
