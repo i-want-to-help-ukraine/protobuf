@@ -8,6 +8,8 @@ package VolunteerServicePackage;
 service VolunteerServiceRPC {
   rpc search(SearchVolunteersDto) returns (SearchVolunteerResponse) {}
 
+  rpc searchRequestedVolunteers(SearchVolunteersDto) returns (SearchVolunteerResponse) {}
+
   rpc getCities(GetByIdsDto) returns (CitiesDto) {}
 
   rpc getActivities(GetByIdsDto) returns (ActivitiesDto) {}

@@ -241,6 +241,10 @@ export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 export interface VolunteerServiceRPCClient {
   search(request: SearchVolunteersDto): Observable<SearchVolunteerResponse>;
 
+  searchRequestedVolunteers(
+    request: SearchVolunteersDto
+  ): Observable<SearchVolunteerResponse>;
+
   getCities(request: GetByIdsDto): Observable<CitiesDto>;
 
   getActivities(request: GetByIdsDto): Observable<ActivitiesDto>;
@@ -286,6 +290,13 @@ export interface VolunteerServiceRPCClient {
 
 export interface VolunteerServiceRPCController {
   search(
+    request: SearchVolunteersDto
+  ):
+    | Promise<SearchVolunteerResponse>
+    | Observable<SearchVolunteerResponse>
+    | SearchVolunteerResponse;
+
+  searchRequestedVolunteers(
     request: SearchVolunteersDto
   ):
     | Promise<SearchVolunteerResponse>
@@ -396,6 +407,7 @@ export function VolunteerServiceRPCControllerMethods() {
   return function (constructor: Function) {
     const grpcMethods: string[] = [
       "search",
+      "searchRequestedVolunteers",
       "getCities",
       "getActivities",
       "getSocialProviders",
