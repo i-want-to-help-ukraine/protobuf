@@ -39,6 +39,14 @@ service VolunteerServiceRPC {
   rpc patchVolunteer(PatchVolunteerRequestDto) returns (VolunteerResponseDto) {}
 
   rpc getRequestedVolunteers(google.protobuf.Empty) returns (VolunteersResponseDto) {}
+
+  rpc addActivity(AddActivityDto) returns (ActivityDto) {}
+
+  rpc addPaymentProvider(AddPaymentProviderDto) returns (PaymentProviderDto) {}
+
+  rpc addContactProvider(AddContactProviderDto) returns (ContactProviderDto) {}
+
+  rpc addSocialProvider(AddSocialProviderDto) returns (SocialProviderDto) {}
 }
 
 // Shared
@@ -160,6 +168,11 @@ message ActivitiesDto {
   repeated ActivityDto activities = 1;
 }
 
+message AddActivityDto {
+  string title = 2;
+  string description = 3;
+}
+
 // City
 message CityDto {
   string id = 1;
@@ -182,6 +195,10 @@ message PaymentProvidersDto {
   repeated PaymentProviderDto paymentProvider = 1;
 }
 
+message AddPaymentProviderDto {
+  string title = 1;
+}
+
 // SocialProvider
 message SocialProviderDto {
   string id = 1;
@@ -192,6 +209,10 @@ message SocialProvidersDto {
   repeated SocialProviderDto socialProviders = 1;
 }
 
+message AddSocialProviderDto {
+  string title = 1;
+}
+
 // ContactProvider
 message ContactProviderDto {
   string id = 1;
@@ -200,6 +221,10 @@ message ContactProviderDto {
 
 message ContactProvidersDto {
   repeated ContactProviderDto contactProviders = 1;
+}
+
+message AddContactProviderDto {
+  string title = 1;
 }
 
 // VolunteerSocial

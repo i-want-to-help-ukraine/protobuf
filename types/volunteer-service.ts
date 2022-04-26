@@ -126,6 +126,11 @@ export interface ActivitiesDto {
   activities: ActivityDto[];
 }
 
+export interface AddActivityDto {
+  title: string;
+  description: string;
+}
+
 /** City */
 export interface CityDto {
   id: string;
@@ -148,6 +153,10 @@ export interface PaymentProvidersDto {
   paymentProvider: PaymentProviderDto[];
 }
 
+export interface AddPaymentProviderDto {
+  title: string;
+}
+
 /** SocialProvider */
 export interface SocialProviderDto {
   id: string;
@@ -158,6 +167,10 @@ export interface SocialProvidersDto {
   socialProviders: SocialProviderDto[];
 }
 
+export interface AddSocialProviderDto {
+  title: string;
+}
+
 /** ContactProvider */
 export interface ContactProviderDto {
   id: string;
@@ -166,6 +179,10 @@ export interface ContactProviderDto {
 
 export interface ContactProvidersDto {
   contactProviders: ContactProviderDto[];
+}
+
+export interface AddContactProviderDto {
+  title: string;
 }
 
 /** VolunteerSocial */
@@ -285,6 +302,20 @@ export interface VolunteerServiceRPCClient {
   ): Observable<VolunteerResponseDto>;
 
   getRequestedVolunteers(request: Empty): Observable<VolunteersResponseDto>;
+
+  addActivity(request: AddActivityDto): Observable<ActivityDto>;
+
+  addPaymentProvider(
+    request: AddPaymentProviderDto
+  ): Observable<PaymentProviderDto>;
+
+  addContactProvider(
+    request: AddContactProviderDto
+  ): Observable<ContactProviderDto>;
+
+  addSocialProvider(
+    request: AddSocialProviderDto
+  ): Observable<SocialProviderDto>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -400,6 +431,31 @@ export interface VolunteerServiceRPCController {
     | Promise<VolunteersResponseDto>
     | Observable<VolunteersResponseDto>
     | VolunteersResponseDto;
+
+  addActivity(
+    request: AddActivityDto
+  ): Promise<ActivityDto> | Observable<ActivityDto> | ActivityDto;
+
+  addPaymentProvider(
+    request: AddPaymentProviderDto
+  ):
+    | Promise<PaymentProviderDto>
+    | Observable<PaymentProviderDto>
+    | PaymentProviderDto;
+
+  addContactProvider(
+    request: AddContactProviderDto
+  ):
+    | Promise<ContactProviderDto>
+    | Observable<ContactProviderDto>
+    | ContactProviderDto;
+
+  addSocialProvider(
+    request: AddSocialProviderDto
+  ):
+    | Promise<SocialProviderDto>
+    | Observable<SocialProviderDto>
+    | SocialProviderDto;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
@@ -422,6 +478,10 @@ export function VolunteerServiceRPCControllerMethods() {
       "changeVolunteerStatus",
       "patchVolunteer",
       "getRequestedVolunteers",
+      "addActivity",
+      "addPaymentProvider",
+      "addContactProvider",
+      "addSocialProvider",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(
