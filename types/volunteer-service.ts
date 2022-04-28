@@ -221,8 +221,9 @@ export interface VolunteerContactDto {
 export interface SearchVolunteersDto {
   cityIds: string[];
   activityIds: string[];
-  offset: number;
   startCursor?: string | undefined;
+  offset: number;
+  count: number;
 }
 
 export interface SearchVolunteerResponse {
