@@ -262,19 +262,24 @@ export interface AddReportDto {
   volunteerId: string;
 }
 
-export interface GetReportsRequest {
+export interface GetReportsRequestDto {
+  volunteerIds: string[];
   startTimestamp: string;
   endTimestamp: string;
 }
 
 export interface ReportsResponseDto {
+  reports: ReportDto[];
+}
+
+export interface ReportDto {
   id: string;
   title: string;
   description: string;
-  proofsOfPayment: ProofOfPayment[];
+  proofsOfPayment: ProofOfPaymentDto[];
 }
 
-export interface ProofOfPayment {
+export interface ProofOfPaymentDto {
   id: string;
   paidAmount: string;
   imageUrls: string[];
@@ -345,7 +350,9 @@ export interface VolunteerServiceRPCClient {
 
   addReport(request: AddReportDto): Observable<ReportsResponseDto>;
 
-  getReports(request: GetReportsRequest): Observable<ReportsResponseDto>;
+  getReportsByIds(
+    request: GetReportsRequestDto
+  ): Observable<ReportsResponseDto>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -494,8 +501,8 @@ export interface VolunteerServiceRPCController {
     | Observable<ReportsResponseDto>
     | ReportsResponseDto;
 
-  getReports(
-    request: GetReportsRequest
+  getReportsByIds(
+    request: GetReportsRequestDto
   ):
     | Promise<ReportsResponseDto>
     | Observable<ReportsResponseDto>
@@ -527,7 +534,7 @@ export function VolunteerServiceRPCControllerMethods() {
       "addContactProvider",
       "addSocialProvider",
       "addReport",
-      "getReports",
+      "getReportsByIds",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(

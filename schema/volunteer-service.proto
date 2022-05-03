@@ -50,7 +50,7 @@ service VolunteerServiceRPC {
 
   rpc addReport(AddReportDto) returns(ReportsResponseDto);
 
-  rpc getReports(GetReportsRequest) returns (ReportsResponseDto);
+  rpc getReportsByIds(GetReportsRequestDto) returns (ReportsResponseDto);
 }
 
 // Shared
@@ -308,19 +308,24 @@ message AddReportDto {
   string volunteerId = 3;
 }
 
-message GetReportsRequest {
-  string startTimestamp = 1;
-  string endTimestamp = 2;
+message GetReportsRequestDto {
+  repeated string volunteerIds = 1;
+  string startTimestamp = 2;
+  string endTimestamp = 3;
 }
 
 message ReportsResponseDto {
+  repeated ReportDto reports = 1;
+}
+
+message ReportDto {
   string id = 1;
   string title = 2;
   string description = 3;
-  repeated ProofOfPayment proofsOfPayment = 4;
+  repeated ProofOfPaymentDto proofsOfPayment = 4;
 }
 
-message ProofOfPayment {
+message ProofOfPaymentDto {
   string id = 1;
   string paidAmount = 2;
   repeated string imageUrls = 3;
