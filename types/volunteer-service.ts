@@ -255,6 +255,31 @@ export interface PatchVolunteerRequestDto {
   contacts?: CreateOrDeleteVolunteerContactDto;
 }
 
+/** Reports */
+export interface AddReportDto {
+  title: string;
+  description: string;
+  volunteerId: string;
+}
+
+export interface GetReportsRequest {
+  startTimestamp: string;
+  endTimestamp: string;
+}
+
+export interface ReportsResponseDto {
+  id: string;
+  title: string;
+  description: string;
+  proofsOfPayment: ProofOfPayment[];
+}
+
+export interface ProofOfPayment {
+  id: string;
+  paidAmount: string;
+  imageUrls: string[];
+}
+
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
 
 export interface VolunteerServiceRPCClient {
@@ -317,6 +342,10 @@ export interface VolunteerServiceRPCClient {
   addSocialProvider(
     request: AddSocialProviderDto
   ): Observable<SocialProviderDto>;
+
+  addReport(request: AddReportDto): Observable<ReportsResponseDto>;
+
+  getReports(request: GetReportsRequest): Observable<ReportsResponseDto>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -457,6 +486,20 @@ export interface VolunteerServiceRPCController {
     | Promise<SocialProviderDto>
     | Observable<SocialProviderDto>
     | SocialProviderDto;
+
+  addReport(
+    request: AddReportDto
+  ):
+    | Promise<ReportsResponseDto>
+    | Observable<ReportsResponseDto>
+    | ReportsResponseDto;
+
+  getReports(
+    request: GetReportsRequest
+  ):
+    | Promise<ReportsResponseDto>
+    | Observable<ReportsResponseDto>
+    | ReportsResponseDto;
 }
 
 export function VolunteerServiceRPCControllerMethods() {
@@ -483,6 +526,8 @@ export function VolunteerServiceRPCControllerMethods() {
       "addPaymentProvider",
       "addContactProvider",
       "addSocialProvider",
+      "addReport",
+      "getReports",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(

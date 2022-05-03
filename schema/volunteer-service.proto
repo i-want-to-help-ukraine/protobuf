@@ -47,6 +47,10 @@ service VolunteerServiceRPC {
   rpc addContactProvider(AddContactProviderDto) returns (ContactProviderDto) {}
 
   rpc addSocialProvider(AddSocialProviderDto) returns (SocialProviderDto) {}
+
+  rpc addReport(AddReportDto) returns(ReportsResponseDto);
+
+  rpc getReports(GetReportsRequest) returns (ReportsResponseDto);
 }
 
 // Shared
@@ -295,4 +299,29 @@ message PatchVolunteerRequestDto {
   CreateOrDeleteVolunteerSocialDto social = 9;
   CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 10;
   CreateOrDeleteVolunteerContactDto contacts = 11;
+}
+
+// Reports
+message AddReportDto {
+  string title = 1;
+  string description = 2;
+  string volunteerId = 3;
+}
+
+message GetReportsRequest {
+  string startTimestamp = 1;
+  string endTimestamp = 2;
+}
+
+message ReportsResponseDto {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  repeated ProofOfPayment proofsOfPayment = 4;
+}
+
+message ProofOfPayment {
+  string id = 1;
+  string paidAmount = 2;
+  repeated string imageUrls = 3;
 }
