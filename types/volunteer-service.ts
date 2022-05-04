@@ -258,7 +258,9 @@ export interface PatchVolunteerRequestDto {
 /** Reports */
 export interface AddReportDto {
   title: string;
-  description: string;
+  imageUrls: string[];
+  paidPositions: string[];
+  paidAmount: string;
   volunteerId: string;
 }
 
@@ -281,12 +283,6 @@ export interface ReportDto {
   volunteerId: string;
   publishState: string;
   publishDate: string;
-}
-
-export interface ProofOfPaymentDto {
-  id: string;
-  paidAmount: string;
-  imageUrls: string[];
 }
 
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";

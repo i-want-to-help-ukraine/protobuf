@@ -304,8 +304,10 @@ message PatchVolunteerRequestDto {
 // Reports
 message AddReportDto {
   string title = 1;
-  string description = 2;
-  string volunteerId = 3;
+  repeated string imageUrls = 2;
+  repeated string paidPositions = 3;
+  string paidAmount = 4;
+  string volunteerId = 5;
 }
 
 message GetReportsRequestDto {
@@ -327,10 +329,4 @@ message ReportDto {
   string volunteerId = 6;
   string publishState = 7;
   string publishDate = 8;
-}
-
-message ProofOfPaymentDto {
-  string id = 1;
-  string paidAmount = 2;
-  repeated string imageUrls = 3;
 }
