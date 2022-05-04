@@ -321,8 +321,12 @@ message ReportsResponseDto {
 message ReportDto {
   string id = 1;
   string title = 2;
-  string description = 3;
-  repeated ProofOfPaymentDto proofsOfPayment = 4;
+  repeated string imageUrls = 3;
+  repeated string paidPositions = 4;
+  string paidAmount = 5;
+  string volunteerId = 6;
+  string publishState = 7;
+  string publishDate = 8;
 }
 
 message ProofOfPaymentDto {

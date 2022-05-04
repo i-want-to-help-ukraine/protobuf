@@ -275,8 +275,12 @@ export interface ReportsResponseDto {
 export interface ReportDto {
   id: string;
   title: string;
-  description: string;
-  proofsOfPayment: ProofOfPaymentDto[];
+  imageUrls: string[];
+  paidPositions: string[];
+  paidAmount: string;
+  volunteerId: string;
+  publishState: string;
+  publishDate: string;
 }
 
 export interface ProofOfPaymentDto {
