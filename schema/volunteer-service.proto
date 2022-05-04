@@ -50,7 +50,7 @@ service VolunteerServiceRPC {
 
   rpc addReport(AddReportDto) returns(ReportsResponseDto);
 
-  rpc getReportsByIds(GetReportsDto) returns (ReportsResponseDto);
+  rpc getVolunteerReports(GetReportsDto) returns (ReportsResponseDto);
 }
 
 // Shared
