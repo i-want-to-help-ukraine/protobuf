@@ -264,7 +264,7 @@ export interface AddReportDto {
   volunteerId: string;
 }
 
-export interface GetReportsRequestDto {
+export interface GetReportsDto {
   volunteerIds: string[];
   startTimestamp: string;
   endTimestamp: string;
@@ -276,13 +276,13 @@ export interface ReportsResponseDto {
 
 export interface ReportDto {
   id: string;
-  title: string;
   imageUrls: string[];
   paidPositions: string[];
   paidAmount: string;
   volunteerId: string;
-  publishState: string;
-  publishDate: string;
+  title?: string | undefined;
+  publishState?: string | undefined;
+  publishDate?: string | undefined;
 }
 
 export const VOLUNTEER_SERVICE_PACKAGE_PACKAGE_NAME = "VolunteerServicePackage";
@@ -350,9 +350,7 @@ export interface VolunteerServiceRPCClient {
 
   addReport(request: AddReportDto): Observable<ReportsResponseDto>;
 
-  getReportsByIds(
-    request: GetReportsRequestDto
-  ): Observable<ReportsResponseDto>;
+  getReportsByIds(request: GetReportsDto): Observable<ReportsResponseDto>;
 }
 
 export interface VolunteerServiceRPCController {
@@ -502,7 +500,7 @@ export interface VolunteerServiceRPCController {
     | ReportsResponseDto;
 
   getReportsByIds(
-    request: GetReportsRequestDto
+    request: GetReportsDto
   ):
     | Promise<ReportsResponseDto>
     | Observable<ReportsResponseDto>
