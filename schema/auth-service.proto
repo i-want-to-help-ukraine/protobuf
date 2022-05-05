@@ -20,3 +20,9 @@ message TokenResponseDto {
   string accessToken = 1;
   string refreshToken = 2;
 }
+
+message UserDto {
+  string id = 1;
+  string loginId = 2;
+  string name = 3;
+}

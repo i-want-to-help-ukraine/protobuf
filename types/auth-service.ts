@@ -19,6 +19,12 @@ export interface TokenResponseDto {
   refreshToken: string;
 }
 
+export interface UserDto {
+  id: string;
+  loginId: string;
+  name: string;
+}
+
 export const AUTH_SERVICE_PACKAGE_PACKAGE_NAME = "AuthServicePackage";
 
 export interface AuthServiceRPCClient {
