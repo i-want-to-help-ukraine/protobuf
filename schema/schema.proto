@@ -1,3 +1,4 @@
 syntax = "proto3";
 
 import "volunteer-service.proto";
+import "auth-service.proto";

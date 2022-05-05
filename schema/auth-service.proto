@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package AuthServicePackage;
+
+service AuthServiceRPC {
+  rpc getToken(GetTokenDto) returns (TokenResponseDto) {}
+
+  rpc refreshToken(RefreshTokenDto) returns (TokenResponseDto) {}
+}
+
+message GetTokenDto {
+  string id = 1;
+}
+
+message RefreshTokenDto {
+  string refreshToken = 1;
+}
+
+message TokenResponseDto {
+  string accessToken = 1;
+  string refreshToken = 2;
+}
