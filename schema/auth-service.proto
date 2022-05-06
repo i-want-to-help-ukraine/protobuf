@@ -10,10 +10,12 @@ service AuthServiceRPC {
 
 message GetTokenDto {
   string id = 1;
+  string authId = 2;
 }
 
 message RefreshTokenDto {
   string refreshToken = 1;
+  string authId = 2;
 }
 
 message TokenResponseDto {

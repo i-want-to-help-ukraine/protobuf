@@ -8,10 +8,12 @@ export const protobufPackage = "AuthServicePackage";
 
 export interface GetTokenDto {
   id: string;
+  authId: string;
 }
 
 export interface RefreshTokenDto {
   refreshToken: string;
+  authId: string;
 }
 
 export interface TokenResponseDto {
