@@ -18,11 +18,6 @@ export interface GetTokenDto {
   authId: string;
 }
 
-export interface RefreshTokenDto {
-  authId: string;
-  refreshToken: string;
-}
-
 export interface TokenResponseDto {
   accessToken: string;
   refreshToken: string;
@@ -40,8 +35,6 @@ export interface AuthServiceRPCClient {
   getUser(request: GetUserDto): Observable<UserResponseDto>;
 
   getToken(request: GetTokenDto): Observable<TokenResponseDto>;
-
-  refreshToken(request: RefreshTokenDto): Observable<TokenResponseDto>;
 }
 
 export interface AuthServiceRPCController {
@@ -55,18 +48,11 @@ export interface AuthServiceRPCController {
     | Promise<TokenResponseDto>
     | Observable<TokenResponseDto>
     | TokenResponseDto;
-
-  refreshToken(
-    request: RefreshTokenDto
-  ):
-    | Promise<TokenResponseDto>
-    | Observable<TokenResponseDto>
-    | TokenResponseDto;
 }
 
 export function AuthServiceRPCControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["getUser", "getToken", "refreshToken"];
+    const grpcMethods: string[] = ["getUser", "getToken"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(
         constructor.prototype,
