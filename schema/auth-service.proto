@@ -3,19 +3,28 @@ syntax = "proto3";
 package AuthServicePackage;
 
 service AuthServiceRPC {
+  rpc getUser(GetUserDto) returns (UserResponseDto) {}
+
   rpc getToken(GetTokenDto) returns (TokenResponseDto) {}
 
   rpc refreshToken(RefreshTokenDto) returns (TokenResponseDto) {}
 }
 
+message GetUserDto {
+  string authId = 1;
+}
+
+message UserResponseDto {
+  UserDto user = 1;
+}
+
 message GetTokenDto {
-  string id = 1;
-  string authId = 2;
+  string authId = 1;
 }
 
 message RefreshTokenDto {
-  string refreshToken = 1;
-  string authId = 2;
+  string authId = 1;
+  string refreshToken = 2;
 }
 
 message TokenResponseDto {
