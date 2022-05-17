@@ -32,6 +32,8 @@ service VolunteerServiceRPC {
 
   rpc updateProfile(UpdateProfileDto) returns (VolunteerResponseDto) {}
 
+  rpc updateProfileV2(UpdateProfileV2Dto) returns (VolunteerResponseDto) {}
+
   rpc hideProfile(HideProfileDto) returns (VolunteerResponseDto) {}
 
   rpc changeVolunteerStatus(ChangeVolunteerStatusRequestDto) returns (VolunteerResponseDto) {}
@@ -104,6 +106,35 @@ message UpdateProfileDto {
   CreateOrDeleteVolunteerSocialDto social = 9;
   CreateOrDeleteVolunteerPaymentOptionDto paymentOptions = 10;
   CreateOrDeleteVolunteerContactDto contacts = 11;
+}
+
+message UpdateProfileV2Dto {
+  string authId = 1;
+  optional string firstName = 2;
+  optional string lastName = 3;
+  optional string description = 4;
+  optional string avatarUrl = 5;
+  optional string organization = 6;
+  repeated string cityIds = 7;
+  repeated string activityIds = 8;
+  repeated UpdateProfileSocialDto social = 9;
+  repeated UpdateProfilePaymentOptionDto paymentOptions = 10;
+  repeated UpdateProfileContactDto contacts = 11;
+}
+
+message UpdateProfileSocialDto {
+  string url = 1;
+  string socialProviderId = 2;
+}
+
+message UpdateProfilePaymentOptionDto {
+  string metadata = 1;
+  string paymentProviderId = 2;
+}
+
+message UpdateProfileContactDto {
+  string metadata = 1;
+  string contactProviderId = 2;
 }
 
 message CreateOrDeleteVolunteerSocialDto {

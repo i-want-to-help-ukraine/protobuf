@@ -60,6 +60,35 @@ export interface UpdateProfileDto {
   contacts?: CreateOrDeleteVolunteerContactDto;
 }
 
+export interface UpdateProfileV2Dto {
+  authId: string;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  description?: string | undefined;
+  avatarUrl?: string | undefined;
+  organization?: string | undefined;
+  cityIds: string[];
+  activityIds: string[];
+  social: UpdateProfileSocialDto[];
+  paymentOptions: UpdateProfilePaymentOptionDto[];
+  contacts: UpdateProfileContactDto[];
+}
+
+export interface UpdateProfileSocialDto {
+  url: string;
+  socialProviderId: string;
+}
+
+export interface UpdateProfilePaymentOptionDto {
+  metadata: string;
+  paymentProviderId: string;
+}
+
+export interface UpdateProfileContactDto {
+  metadata: string;
+  contactProviderId: string;
+}
+
 export interface CreateOrDeleteVolunteerSocialDto {
   create: CreateVolunteerSocialDto[];
   delete: string[];
@@ -322,6 +351,10 @@ export interface VolunteerServiceRPCClient {
 
   updateProfile(request: UpdateProfileDto): Observable<VolunteerResponseDto>;
 
+  updateProfileV2(
+    request: UpdateProfileV2Dto
+  ): Observable<VolunteerResponseDto>;
+
   hideProfile(request: HideProfileDto): Observable<VolunteerResponseDto>;
 
   changeVolunteerStatus(
@@ -439,6 +472,13 @@ export interface VolunteerServiceRPCController {
     | Observable<VolunteerResponseDto>
     | VolunteerResponseDto;
 
+  updateProfileV2(
+    request: UpdateProfileV2Dto
+  ):
+    | Promise<VolunteerResponseDto>
+    | Observable<VolunteerResponseDto>
+    | VolunteerResponseDto;
+
   hideProfile(
     request: HideProfileDto
   ):
@@ -523,6 +563,7 @@ export function VolunteerServiceRPCControllerMethods() {
       "getVolunteerAuthProfile",
       "createProfile",
       "updateProfile",
+      "updateProfileV2",
       "hideProfile",
       "changeVolunteerStatus",
       "patchVolunteer",
